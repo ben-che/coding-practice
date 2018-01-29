@@ -18,8 +18,7 @@ function Entry(title, content, author) {
     this.author=author;
 }
 
-
-// debugging
+/* debugging
 
 // tests for journal constructor
 let journalExample = new Journal('journal_name', []);
@@ -39,4 +38,6 @@ console.log(journalExample.entries);
 console.log('test for displayEntry method: ');
 journalExample.displayEntries();
 
-
+*/
+// define main journal object for use
+let journalMain = new Journal('Main Journal Object', []);
