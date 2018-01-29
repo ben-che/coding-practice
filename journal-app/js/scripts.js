@@ -26,6 +26,18 @@ $(document).ready(() => {
 
     // add items to the actual dom
 
+    var parent = $('div#divJournal');
+
+    //  create a string that expresses the html element we want to insert
+
+    var newElement = "<div class='journal-item'> <h1 class='journal-title'> " + journalMain.entries[0].title + " </h1> <p class='journal-content'> " + journalMain.entries[0].content + "</p> <p class='journal-author'> " +journalMain.entries[0].author + "</div>";
+    //  Call the append() method of the parent element,
+    //    supplying a string argument that describes
+    //    the new html element we are adding
+    $('div#divJournal').append(newElement);
+  
+    
+
 
 
 

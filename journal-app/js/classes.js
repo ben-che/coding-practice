@@ -5,7 +5,7 @@ function Journal(name, entries) {
     this.entries = entries;
     entries=[];
     this.addEntry = function(title, content, author) {
-        this.entries.push(new Entry(title, content, author));
+        this.entries.unshift(new Entry(title, content, author));        // adds item to index 0 of array
     }
     this.displayEntries = function() {
         console.log(this.entries);
@@ -18,7 +18,7 @@ function Entry(title, content, author) {
     this.author=author;
 }
 
-/* debugging
+// debugging
 
 // tests for journal constructor
 let journalExample = new Journal('journal_name', []);
@@ -38,6 +38,6 @@ console.log(journalExample.entries);
 console.log('test for displayEntry method: ');
 journalExample.displayEntries();
 
-*/
+
 // define main journal object for use
 let journalMain = new Journal('Main Journal Object', []);

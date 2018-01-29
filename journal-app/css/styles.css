@@ -1,0 +1,10 @@
+/** additional styles for app **/
+
+label {
+    color:#eee;
+}
+
+.form-body {
+    padding:50px;
+    background-color:#333;
+}
