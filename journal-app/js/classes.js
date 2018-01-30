@@ -3,7 +3,6 @@
 function Journal(name, entries) {
     this.name = name;
     this.entries = entries;
-    entries=[];
     this.addEntry = function(title, content, author) {
         this.entries.unshift(new Entry(title, content, author));        // adds item to index 0 of array
     }
