@@ -1,39 +1,67 @@
-// script to scrape boxofficemojo.com to return highest grossing movies
-
+// spoiler machine
+//  takes in 2 arguments, a string and a num (in milliseconds)
+const cheerio = require('cheerio');
 const request = require('request');
-const cheerio = require('cheerio')
 
+// ============= //
+// main fn call
+// ============= //
 
-// create movie obj constructor
-function Movie(rank, name, studio, revenue) {
-    this.rank = rank;
-    this.name = name;
-    this.year = year;
-    this.revenue = revenue;
+movieRecommendation();
+
+// ==================== //
+// main fn documentation:
+// ==================== //
+
+// spoilerMachine takes in no arguments and returns nothing
+// fn (none) -> none
+//  side effect: console logs either an error message or a spoiler after a certain amount of time has passed
+function movieRecommendation () {
+    
+    let userInput = "Tron";
+    let movieRecList = [];
+    
+    parseDocument(userInput, movieRecList);
+
 }
+// ================ //
+// helper functions:
+// ================ //
 
-// create movie instance
-let movieData = new Movie([],[],[],[]);
+function parseDocument(userInput, movieRecList) {
+    // use variables to hold the movie name and spoiler time (converted to seconds from milliseconds)
 
-request("http://www.boxofficemojo.com/alltime/world/", function(error, response, body) {
-    if (error) {
-        console.log(error);
+    // assign the destination url to a variable for request function
+    let movieUrl="https://api.themoviedb.org/3/search/movie?api_key=f07a88427ffc5183abd63adf3aa6c187&query=" + (userInput.split(" ").join("+"));
+    
+    // this uses user input to get movie id
+    request(movieUrl, function(error, response, body) {
+
+        // do this if no errors occur and the movie is found in the database:
+        if ( (!error) && (((JSON.parse(body)).results.length) !== 0) ) {
+
+            // get movie id to use for search in query
+            let movieID=((JSON.parse(body)).results[1]).id;
+            console.log(movieID);
+            let movieRecUrl = 'https://api.themoviedb.org/3/movie/'+movieID+'/recommendations?page=1&language=en-US&api_key=f07a88427ffc5183abd63adf3aa6c187';
+
+            // this uses movie id attained above to get other recommendations
+            request(movieRecUrl, function(error, response, body) {
+                
+                for (let i = 0; i < JSON.parse(body).results.length; i++){
+                    movieRecList.push(JSON.parse(body).results[i].title);
+                    console.log(JSON.parse(body).results[i].title);
+                }
+                
+            })
+        } 
+
+        // do these if an error occurs or the movie was not found in the database
+        else if (error) {
+            console.log('error encountered: \n' + error);
+        }
+        else {
+            console.log("your movie was not found in our database");
+        }
     }
-    else {
-        let $=cheerio.load(body);
-
-        // select all movie titles and assign it to movieNames variable
-        let movieNames = $('td[valign="top"] table tbody tr td font[size="2"] a');
-        // iterate through each movie title and add it to the movieData.name array
-        $(movieNames).each(function(i, elem) {
-            movieData.name.push($(this).text());
-        })
-
-        //select all movie years and assign it to movieYear variable
-
-        // iterate through each movie title and add it to the movieYear array
-        // check to see if movie names are assigned correctly, and if the unneeded titles are dropped
-        console.log(movieData.name);
-    }
-})
-
+    )}
