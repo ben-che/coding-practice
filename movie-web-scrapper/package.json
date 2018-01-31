@@ -1,0 +1,24 @@
+{
+  "name": "movie-web-scrapper",
+  "version": "1.0.0",
+  "description": "scraping practice",
+  "main": "scraper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/github.com/ben-che.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/github.com/ben-che/issues"
+  },
+  "homepage": "https://github.com/github.com/ben-che#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "request": "^2.83.0",
+    "require": "^2.4.20"
+  }
+}
