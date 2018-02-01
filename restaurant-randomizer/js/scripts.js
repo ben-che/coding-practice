@@ -5,28 +5,59 @@ let keys = require( "../../secrets.js");
 let request = require('request');
 
 // test vars
-let location = "toronto";
-let category = "bars";
-let radius ="1000";
+let location = {
+    address:'480 euclid ave',
+    city: 'toronto',
+    province: 'ontario',
+    country:'canada'
+}
+let category = "korean";
+let radius ="2000";
 
+userQuery(location,category,radius);
 
 // main function to make api requests to yelp
 function userQuery(location, category, radius) {
-    request.get('https://api.yelp.com/v3/businesses/search?location=' + location +'&categories='+category +'&radius=' + radius, {
+    request.get('https://api.yelp.com/v3/businesses/search?location=' + location.address + "," +location.city +","+location.province+','+location.country+'&categories='+category +'&radius=' + radius, {
         headers : {
             'Authorization': 'Bearer '+ keys.data.yelpAPI
         }
     },  (error, res, body) => {
+        
         let queryData = JSON.parse(body);
-        let queryDataLength = queryData.length;
+        let queryDataLength = queryData.businesses.length;
+        // no results:
+        if (queryDataLength < 1) {
+            console.log('no results. be a bit more specific with your location! there may be more than one ' + location)
+        }
 
-        // debuggin *******************
-        console.log(queryData);
-        console.log(queryDataLength);
-        // ****************************
+        else {
+            // debuggin *******************
+            // console.log(queryData.businesses[0]);
+            // console.log(queryDataLength);
+            // ****************************
+
+            // random restaurant information is held here
+            let randomRestuarantData = restaurantRandomizer(queryData, queryDataLength);
+            // debugging - ensure restaurantRandomizer fn works
+            // console.log(randomRestuarantData);
+
+            // grab the elements to display:
+            let name = randomRestuarantData.name;
+            let image = randomRestuarantData.image_url;
+            let rating = randomRestuarantData.rating;
+            let price = randomRestuarantData.price;
+            let address = randomRestuarantData.location.address1;
+
+            // debugging - ensure that all selectors work
+            console.log('name: ' + name + ' image: ' + image + ' rating: ' +rating+ ' price: ' +price + ' address: ' + address);
+        }
     })
 }
 
+// randomly pick one restaurant from the query results
 function restaurantRandomizer(queryData, queryDataLength) {
-    let randomNumber = (Math.random() * queryDataLength);
+    let randomNumber = Math.floor((Math.random() * Number(queryDataLength)));
+    let randomRestaurant = queryData.businesses[randomNumber];
+    return randomRestaurant;
 }
