@@ -1,2 +1,5 @@
 journal-app/.vscode/
 movie-web-scrapper/node_modules/
+secrets.js
+word-guesser/
+restaurant-randomizer/node_modules/
