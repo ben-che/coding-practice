@@ -5,14 +5,19 @@ let keys = require( "../../secrets.js");
 let request = require('request');
 
 // test vars
+// some sort of location variable is required
 let location = {
-    address:'480 euclid ave',
+    address:'35 hayden street',
     city: 'toronto',
     province: 'ontario',
     country:'canada'
 }
-let category = "korean";
-let radius ="2000";
+
+// some categories like 'indian' need to be changed into a string that the api accepts, like 'indpak'
+// should list options as a dropdown menu or auto complete
+let category = "indpak";
+// max radius is 40000 meters
+let radius ="500";
 
 userQuery(location,category,radius);
 
