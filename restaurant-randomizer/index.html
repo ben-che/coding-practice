@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>issa random restaurant</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+  <body>
+    <div class="input-field">
+
+        <h1 class="input-header"></h1>
+
+        <form class='input-form' method="get" action="/result">
+            <!-- user inputs location -->
+            <label class="text-muted">location:</label>
+            <input type='text' name='city' id='city' placeholder="enter your city here!">
+
+            <!-- user choose category of food -->
+            <label class="text-muted">category of food:</label>
+            <select name='category'>
+                <option value="" selected>Any</option>
+                <option value="" disabled>CULTURE</option>
+                <option value="afghani">Afghan</option>
+                <option value="african">African</option>
+                <option value="newamerican">American</option>
+                <option value="arabian">Arabian</option>
+                <option value="asianfusion">Asian Fusion</option>
+                <option value="austrian">Austrian</option>
+                <option value="cajun">Cajun</option>
+                <option value="caribbean">Caribbean</option>
+                <option value="chinese">Chinese</option>
+                <option value="ethiopian">Ethiopian</option>
+                <option value="hakka">Hakka</option>
+                <option value="filipino">Filipino</option>
+                <option value="french">French</option>
+                <option value="greek">Greek</option>
+                <option value="hkcafe">Hong Kong</option>
+                <option value="indpak">Indian</option>
+                <option value="italian">Italian</option>
+                <option value="japanese">Japanese</option>
+                <option value="korean">Korean</option>
+                <option value="malaysian">Malaysian</option>
+                <option value="mexican">Mexican</option>
+                <option value="mideastern">Middle Eastern</option>
+                <option value="spanish">Spanish</option>
+                <option value="szechuan">Szechuan</option>
+                <option value="vietnamese">Vietnamese</option>
+
+                <option value="" disabled>TYPE</option>
+                <option value="bar">Bars</option>
+                <option value="BBQ">BBQ</option>
+                <option value="breakfast_brunch">Breakfast/Brunch</option>
+                <option value="burgers">Burgers</option>
+                <option value="cafes">Cafe</option>
+                <option value="cheesesteaks">Cheesesteaks</option>
+                <option value="comfortfood">Comfort Food</option>
+                <option value="chicken_wings">Chicken Wings</option>
+                <option value="congee">Congee</option>
+                <option value="creperies">Crepes</option>
+                <option value="dimsum">Dim Sum</option>
+                <option value="dumpling">Dumplings</option>
+                <option value="fishnchips">Fish N Chips</option>
+                <option value="fondue">Fondue</option>
+                <option value="hotpot">Hot Pot</option>
+                <option value="izakaya">Izakaya</option>
+                <option value="noodles">Noodles</option>
+                <option value="pita">Pita</option>
+                <option value="pizza">Pizza</option>
+                <option value="ramen">Ramen</option>
+                <option value="rice">Rice</option>
+                <option value="salad">Salad</option>
+                <option value="sandwiches">Sandwiches</option>
+                <option value="seafood">Seafood</option>
+                <option value="steak">Steak</option>
+                <option value="soulfood">Soul Food</option>
+                <option value="soup">Soup</option>
+                <option value="sushi">Sushi</option>
+                <option value="tacos">Tacos</option>
+                <option value="tapasmallplates">Tapas</option>
+                <option value="wok">Wok</option>
+                <option value="wraps">Wraps</option>
+                
+                <option value="" disabled>RESTRICTIONS</option>
+                <option value="halal">Halal</option>
+                <option value="kosher">Kosher</option>
+                <option value="vegan">Vegan</option>
+                <option value="vegetarian">Vegetarian</option>
+            </select>
+
+            <label class="text-muted">radius</label>
+            <input type='text' name='radius' id='radius' placeholder="enter max search distance">
+
+            <input id="submit" type='submit' value='search'>
+        </form>
+
+    </div> 
+
+    <div class="random-restaurant">
+
+    </div>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/server.js"></script>
+    <!-- <script>$('#submit').submit(function () {
+        sendContactForm();
+        return false;
+       });
+    </script> -->
+</body>
+</html>

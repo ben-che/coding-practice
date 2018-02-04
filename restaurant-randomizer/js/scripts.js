@@ -1,5 +1,10 @@
 // grab secrets
-let keys = require( "../../secrets.js");
+const keys = require( "../../secrets.js");
+const express = require('express');
+
+// express server
+let app = express();
+app.use(express.static('../'));
 
 // node packages
 let request = require('request');
@@ -7,17 +12,17 @@ let request = require('request');
 // test vars
 // some sort of location variable is required
 let location = {
-    address:'35 hayden street',
-    city: 'toronto',
+    address:'50 westwood ave',
+    city: 'hamilton',
     province: 'ontario',
     country:'canada'
 }
 
 // some categories like 'indian' need to be changed into a string that the api accepts, like 'indpak'
 // should list options as a dropdown menu or auto complete
-let category = "indpak";
+let category = "japanese";
 // max radius is 40000 meters
-let radius ="500";
+let radius ="5000";
 
 userQuery(location,category,radius);
 
@@ -30,6 +35,7 @@ function userQuery(location, category, radius) {
     },  (error, res, body) => {
         
         let queryData = JSON.parse(body);
+        console.log('the yelp api returns: '+ JSON.stringify(queryData));
         let queryDataLength = queryData.businesses.length;
         // no results:
         if (queryDataLength < 1) {
@@ -66,3 +72,30 @@ function restaurantRandomizer(queryData, queryDataLength) {
     let randomRestaurant = queryData.businesses[randomNumber];
     return randomRestaurant;
 }
+
+
+// api endpoint
+
+app.get('/result', (req, res) => {
+    
+    let inputLocation = {
+        // address: req.query.address,
+        city: req.query.city,
+        // province: req.query.province,
+        // country: req.query.country
+    }
+    let inputCategory = req.query.category;
+    // max radius is 40000 meters
+    let inputRadius = req.query.radius;
+
+    console.log(req.query);
+    console.log(req.query.city);
+    console.log(req.query.radius)
+    userQuery(inputLocation, inputCategory, inputRadius);
+    
+})
+
+// // server's listening.
+app.listen('8080', ()=> {
+    console.log('listening to port 8080');
+})

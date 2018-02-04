@@ -1,0 +1,27 @@
+/* input-field styles */
+
+body {
+    background: #333;
+}
+
+@media(min-width: 700px){
+    label {
+        text-align: left;
+
+    }
+    .input-header {
+        font-size: 1.5rem;
+        color: #eee;
+        text-align:center;
+    }
+    .input-field {
+        width:30%;
+        height:100%;
+        top:0;
+        left:0;
+
+    }
+    .input-form {
+        background-color:#333;
+    }
+}
