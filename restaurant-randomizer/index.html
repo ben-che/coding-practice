@@ -11,98 +11,104 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
   <body>
+
     <div class="input-field">
 
-        <h1 class="input-header"></h1>
+        <h1 class="input-header">Restaurizer</h1>
+        <h2 class="input-subtitle">A restaurant randomizer</h2>
 
         <form class='input-form' method="get" action="/result">
-            <!-- user inputs location -->
-            <label class="text-muted">location:</label>
-            <input type='text' name='city' id='city' placeholder="enter your city here!">
+            <div class='row'>
+                <div class='col-lg-4 col-md-4 col-xs-12'>
+                    <!-- user inputs location -->
+                    <h3 class='form-subtitle'>Step 1 (required): Where do you want to eat?</h3>
+                    <input class='input-text' type='text' name='city' id='city' placeholder="ex. Toronto, Ontario" required>
+                </div>
+                    <div class='col-lg-4 col-md-4 col-xs-12'>
+                    <!-- user choose category of food -->
+                    <h3 class='form-subtitle'>Step 2 (optional): Narrow your possibilities:</h3>
+                    <select name='category'>
+                        <option value="" selected>Any</option>
+                        <option value="" disabled>CULTURE</option>
+                        <option value="afghani">Afghan</option>
+                        <option value="african">African</option>
+                        <option value="newamerican">American</option>
+                        <option value="arabian">Arabian</option>
+                        <option value="asianfusion">Asian Fusion</option>
+                        <option value="austrian">Austrian</option>
+                        <option value="cajun">Cajun</option>
+                        <option value="caribbean">Caribbean</option>
+                        <option value="chinese">Chinese</option>
+                        <option value="ethiopian">Ethiopian</option>
+                        <option value="hakka">Hakka</option>
+                        <option value="filipino">Filipino</option>
+                        <option value="french">French</option>
+                        <option value="greek">Greek</option>
+                        <option value="hkcafe">Hong Kong</option>
+                        <option value="indpak">Indian</option>
+                        <option value="italian">Italian</option>
+                        <option value="japanese">Japanese</option>
+                        <option value="korean">Korean</option>
+                        <option value="malaysian">Malaysian</option>
+                        <option value="mexican">Mexican</option>
+                        <option value="mideastern">Middle Eastern</option>
+                        <option value="spanish">Spanish</option>
+                        <option value="szechuan">Szechuan</option>
+                        <option value="vietnamese">Vietnamese</option>
 
-            <!-- user choose category of food -->
-            <label class="text-muted">category of food:</label>
-            <select name='category'>
-                <option value="" selected>Any</option>
-                <option value="" disabled>CULTURE</option>
-                <option value="afghani">Afghan</option>
-                <option value="african">African</option>
-                <option value="newamerican">American</option>
-                <option value="arabian">Arabian</option>
-                <option value="asianfusion">Asian Fusion</option>
-                <option value="austrian">Austrian</option>
-                <option value="cajun">Cajun</option>
-                <option value="caribbean">Caribbean</option>
-                <option value="chinese">Chinese</option>
-                <option value="ethiopian">Ethiopian</option>
-                <option value="hakka">Hakka</option>
-                <option value="filipino">Filipino</option>
-                <option value="french">French</option>
-                <option value="greek">Greek</option>
-                <option value="hkcafe">Hong Kong</option>
-                <option value="indpak">Indian</option>
-                <option value="italian">Italian</option>
-                <option value="japanese">Japanese</option>
-                <option value="korean">Korean</option>
-                <option value="malaysian">Malaysian</option>
-                <option value="mexican">Mexican</option>
-                <option value="mideastern">Middle Eastern</option>
-                <option value="spanish">Spanish</option>
-                <option value="szechuan">Szechuan</option>
-                <option value="vietnamese">Vietnamese</option>
-
-                <option value="" disabled>TYPE</option>
-                <option value="bar">Bars</option>
-                <option value="BBQ">BBQ</option>
-                <option value="breakfast_brunch">Breakfast/Brunch</option>
-                <option value="burgers">Burgers</option>
-                <option value="cafes">Cafe</option>
-                <option value="cheesesteaks">Cheesesteaks</option>
-                <option value="comfortfood">Comfort Food</option>
-                <option value="chicken_wings">Chicken Wings</option>
-                <option value="congee">Congee</option>
-                <option value="creperies">Crepes</option>
-                <option value="dimsum">Dim Sum</option>
-                <option value="dumpling">Dumplings</option>
-                <option value="fishnchips">Fish N Chips</option>
-                <option value="fondue">Fondue</option>
-                <option value="hotpot">Hot Pot</option>
-                <option value="izakaya">Izakaya</option>
-                <option value="noodles">Noodles</option>
-                <option value="pita">Pita</option>
-                <option value="pizza">Pizza</option>
-                <option value="ramen">Ramen</option>
-                <option value="rice">Rice</option>
-                <option value="salad">Salad</option>
-                <option value="sandwiches">Sandwiches</option>
-                <option value="seafood">Seafood</option>
-                <option value="steak">Steak</option>
-                <option value="soulfood">Soul Food</option>
-                <option value="soup">Soup</option>
-                <option value="sushi">Sushi</option>
-                <option value="tacos">Tacos</option>
-                <option value="tapasmallplates">Tapas</option>
-                <option value="wok">Wok</option>
-                <option value="wraps">Wraps</option>
-                
-                <option value="" disabled>RESTRICTIONS</option>
-                <option value="halal">Halal</option>
-                <option value="kosher">Kosher</option>
-                <option value="vegan">Vegan</option>
-                <option value="vegetarian">Vegetarian</option>
-            </select>
-
-            <label class="text-muted">radius</label>
-            <input type='text' name='radius' id='radius' placeholder="enter max search distance">
-
+                        <option value="" disabled>TYPE</option>
+                        <option value="bar">Bars</option>
+                        <option value="BBQ">BBQ</option>
+                        <option value="breakfast_brunch">Breakfast/Brunch</option>
+                        <option value="burgers">Burgers</option>
+                        <option value="cafes">Cafe</option>
+                        <option value="cheesesteaks">Cheesesteaks</option>
+                        <option value="comfortfood">Comfort Food</option>
+                        <option value="chicken_wings">Chicken Wings</option>
+                        <option value="congee">Congee</option>
+                        <option value="creperies">Crepes</option>
+                        <option value="dimsum">Dim Sum</option>
+                        <option value="dumpling">Dumplings</option>
+                        <option value="fishnchips">Fish N Chips</option>
+                        <option value="fondue">Fondue</option>
+                        <option value="hotpot">Hot Pot</option>
+                        <option value="izakaya">Izakaya</option>
+                        <option value="noodles">Noodles</option>
+                        <option value="pita">Pita</option>
+                        <option value="pizza">Pizza</option>
+                        <option value="ramen">Ramen</option>
+                        <option value="rice">Rice</option>
+                        <option value="salad">Salad</option>
+                        <option value="sandwiches">Sandwiches</option>
+                        <option value="seafood">Seafood</option>
+                        <option value="steak">Steak</option>
+                        <option value="soulfood">Soul Food</option>
+                        <option value="soup">Soup</option>
+                        <option value="sushi">Sushi</option>
+                        <option value="tacos">Tacos</option>
+                        <option value="tapasmallplates">Tapas</option>
+                        <option value="wok">Wok</option>
+                        <option value="wraps">Wraps</option>
+                        
+                        <option value="" disabled>RESTRICTIONS</option>
+                        <option value="halal">Halal</option>
+                        <option value="kosher">Kosher</option>
+                        <option value="vegan">Vegan</option>
+                        <option value="vegetarian">Vegetarian</option>
+                    </select>
+                </div>
+                <div class='col-lg-4 col-md-4 col-xs-12'>
+                    <!-- asks user for radius -->
+                    <h3 class="form-subtitle">Step 3 (optional): Pick a search radius:</h3>
+                    <input class='input-text' type='text' name='radius' id='radius' placeholder="ex. 2500">
+                </div>
+            </div>
             <input id="submit" type='submit' value='search'>
         </form>
-
-    </div> 
-
-    <div class="random-restaurant">
-
+       
     </div>
+   
+
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

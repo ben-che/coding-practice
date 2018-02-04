@@ -9,7 +9,9 @@ app.use(express.static('../'));
 // node packages
 let request = require('request');
 
-// test vars
+// ****************
+// test cases *****
+// ****************
 // some sort of location variable is required
 let location = {
     address:'50 westwood ave',
@@ -24,7 +26,10 @@ let category = "japanese";
 // max radius is 40000 meters
 let radius ="5000";
 
-userQuery(location,category,radius);
+// test command:
+// userQuery(location,category,radius);
+
+// ****************
 
 // main function to make api requests to yelp
 function userQuery(location, category, radius) {
@@ -59,9 +64,10 @@ function userQuery(location, category, radius) {
             let rating = randomRestuarantData.rating;
             let price = randomRestuarantData.price;
             let address = randomRestuarantData.location.address1;
+            let yelpUrl = randomRestuarantData.url;
 
             // debugging - ensure that all selectors work
-            console.log('name: ' + name + ' image: ' + image + ' rating: ' +rating+ ' price: ' +price + ' address: ' + address);
+            console.log('name: ' + name + ' image: ' + image + ' rating: ' +rating+ ' price: ' +price + ' address: ' + address + 'yelp url: ' + yelpUrl);
         }
     })
 }

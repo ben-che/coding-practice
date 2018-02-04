@@ -1,27 +1,120 @@
 /* input-field styles */
 
 body {
-    background: #333;
+    background: #333 url('https://source.unsplash.com/random/?food,restaurant,cafe,white,bread,coffee,bar') no-repeat fixed;
+    background-size: cover;
+}
+
+.input-text, select {
+    margin-bottom:5vh;
+    min-width:200px;
+    background-color:transparent;
+    color:white;
+    border-right:none;
+    border-left:none;
+    border-top:none;
+    border-bottom:2px solid #fff;
+    box-shadow: none;
+    transition-property: outline, box-shadow, width, border-bottom;
+    transition-duration: 0.3s;
+}
+
+.input-text:focus {
+    outline: none;
+    box-shadow: none;
+    border: none;
+    border-bottom: 2px solid rgb(31, 211, 55)
+}
+
+select:focus {
+    outline:none;
+    box-shadow: none;
+    border:none;
+}
+
+.input-field {
+    margin-top:5vh;
+    background-color: rgba(0, 0, 0, 0.65);
+    border: 2px solid #111;
+    border-radius: 10px;
+}
+
+.input-form {
+    padding:30px;
+    text-align:center;
+    margin:5vh auto;
+}
+
+.input-header {
+    color: #eee;
+    text-align:center;
+}
+
+.input-subtitle {
+    color: #eee;
+    text-align:center;
+    font-family:cursive;
+}
+
+.form-subtitle {
+    color: #eee;
+    text-align:center;
+    font-size:1rem;
+}
+
+#submit {
+    display:block;
+    margin:40px auto;
+    margin-bottom:0;
+    box-sizing: border-box;
+    height: 50px;
+    width: 200px;
+    display: table;
+    font-size: 20px;
+    border:2px solid #fff;
+    color:#fff;
+    font-weight: bold;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.55);
+    background:transparent;
+    cursor: pointer;
+    transition-property: background-color, color;
+    transition-duration: 0.7s;
+}
+
+#submit:hover {
+    background-color: #fff;
+    color: #333;
 }
 
 @media(min-width: 700px){
     label {
         text-align: left;
-
     }
+
     .input-header {
-        font-size: 1.5rem;
-        color: #eee;
+        font-size: 2rem;
+    }
+
+    .input-subtitle {
+        font-size:1.5rem;
+    }
+
+    .input-field {
+        margin-top:15vh;
+        margin-left:auto;
+        margin-right:auto;
+        display:block;
+        padding:30px;
+        width:80%;
+        min-height:50%;
+    }
+
+    .input-form {
+        margin-top:3vh;
         text-align:center;
     }
-    .input-field {
-        width:30%;
-        height:100%;
-        top:0;
-        left:0;
 
-    }
-    .input-form {
-        background-color:#333;
+    .input-text, select {
+        min-width:100px;
     }
 }
