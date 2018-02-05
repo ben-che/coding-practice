@@ -65,7 +65,8 @@ function userQuery(location, category, radius) {
             let price = randomRestuarantData.price;
             let address = randomRestuarantData.location.address1;
             let yelpUrl = randomRestuarantData.url;
-
+            console.log(yelpUrl);
+            return yelpUrl;
             // debugging - ensure that all selectors work
             console.log('name: ' + name + ' image: ' + image + ' rating: ' +rating+ ' price: ' +price + ' address: ' + address + 'yelp url: ' + yelpUrl);
         }
@@ -97,7 +98,10 @@ app.get('/result', (req, res) => {
     console.log(req.query);
     console.log(req.query.city);
     console.log(req.query.radius)
-    userQuery(inputLocation, inputCategory, inputRadius);
+    let yelpUrl = String(userQuery(inputLocation, inputCategory, inputRadius));
+    
+    // redirect to random restaurant yelp page
+    res.redirect(yelpUrl);
     
 })
 
