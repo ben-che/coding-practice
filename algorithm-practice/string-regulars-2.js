@@ -12,3 +12,5 @@ console.log(kindaNeighbours('laura sobs'));
 
 // returns true
 console.log(kindaNeighbours("after badly"));
+
+// without reg expressions:
