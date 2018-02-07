@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Search Results</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+    <!-- Customs Styles -->
+    <link rel="stylesheet" href="/styles.css">
+
+    </head>
+    <body class='search-body'>
+        <div class="search-bar-wrapper">
+            <div class="row">
+                <div>
+                    <a href="/">Home</a>
+                </div>
+                <div class='search-bar ml-auto'>
+                    <form action='/search' method='GET'>
+                        <input name='movieId' />
+                        <button type='submit'>Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class='movie-result-wrapper'>
+            <% for (let i = 0; i < arr.length; i++) { %>
+                <% if (i % 2 === 0) { %>
+                    <div class='row'>
+                <% } %>
+                <div class='movie-wrapper col-xs-6 col-s-6 col-md-6 col-lg-6 col-xl-6'>
+                    <div class='movie-card'>
+                        <div class='row'>
+                            <div class='col-xs-6 col-s-6 col-md-3 col-lg-5 col-xl-5'>
+                                <img class='img-fluid' src=<%= 'https://image.tmdb.org/t/p/w1280' + arr[i].poster_path %> >
+                            </div>
+                            <div class='col-xs-6 col-s-6 col-md-9 col-lg-7 col-xl-7'>
+                                <p class='movie-title-text'> <%= arr[i].original_title %> </p>
+                                <p class='movie-rating-text'>Rating based on <%= arr[i].vote_count %> votes</p>
+                                <div class='row col-12'>
+                                    <% for (let j = 0; j <= arr[i].vote_average; j++) { %>
+                                        <i class="fas fa-star fa-star-detail"></i>
+                                    <% } %>
+                                </div>
+                                <p class='text-muted movie-caption'> <%= arr[i].overview %> </p>
+                                <a href=<%= "/movie/" + arr[i].id %> >More details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% if (i % 2 === 1) { %>
+                    </div> 
+                <% } %>
+            <% } %>
+        </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  </body>
+</html>

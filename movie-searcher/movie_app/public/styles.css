@@ -1,0 +1,91 @@
+body {
+    /* background: #333 url('https://source.unsplash.com/random/?film,movie,cinema,theatre,popcorn') fixed no-repeat; */
+    background-size: cover;
+}
+
+.search-bar{
+    float:right;
+    right:0;
+}
+
+.search-body {
+    background-color:#eee;
+}
+
+.search-bar-wrapper {
+    background-color:#333;
+    position:fixed;
+    top:0;
+    width:100%;
+    padding: 1.5vh 12.5vw;
+    z-index:2;
+}
+
+.movie-result-wrapper {
+    width:80%;
+    padding:20px;
+    margin: 5vh auto;
+}
+.movie-card {
+    background-color: #fff;
+    padding: 10px 20px 10px 10px;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, .7);
+}
+
+.movie-img {
+    margin: 0 auto;
+}
+
+.movie-wrapper {
+    margin: 2vh auto;
+    padding:2vh 2vw;
+ 
+}
+
+.movie-title {
+    font-size:1.3rem;
+    color:#333;
+    margin-bottom:5px;
+}
+
+.movie-caption {
+    font-size:0.8rem;
+    margin-bottom:5px;
+}
+
+.movie-rating-text {
+    font-size:0.75rem;
+    opacity:0.5;
+    margin-bottom:5px;
+}
+
+.fa-star {
+    font-size:0.7rem;
+    padding-top:0;
+    margin-bottom:10px;
+    padding-right:2px;
+    color:rgb(218, 204, 11);
+}
+
+/* movie detail pages */
+.movie-rating-text-detail {
+    font-size:0.9rem;
+}
+
+.movie-title-detail {
+    font-size: 1.5rem;
+}
+.movie-caption-detail {
+    font-size: 1rem;
+}
+
+.movie-star-detail {
+    font-size:1.1rem;
+}
+
+.movie-card-detail {
+    margin: 1vh auto;
+    background-color: #fff;
+    padding: 10px 20px 10px 10px;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, .7);
+}
