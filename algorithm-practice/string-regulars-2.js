@@ -4,13 +4,34 @@
 //Otherwise return the string false. Input:"after badly" Output:"false" Input:"Laura sobs" Output:"true"
 
 function kindaNeighbours(str) {
-    return !/(a...b)/.test(str);
+    return /(a...b)/.test(str);
 }
 
-// returns false
+// returns true
 console.log(kindaNeighbours('laura sobs'));
 
-// returns true
+// returns false
 console.log(kindaNeighbours("after badly"));
 
 // without reg expressions:
+function kindaRegular(str) {
+    if (str.length < 3) {
+        return false;
+    }
+    else {
+        for (let i=0; i < str.length; i++) {
+            if ((str[i] === "a") && (str[i+2] === "b")) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+}
+
+// returns true
+console.log(kindaNeighbours('laura sobs'));
+
+// returns false
+console.log(kindaRegular("after badly"));
