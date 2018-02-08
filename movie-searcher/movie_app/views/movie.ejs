@@ -22,7 +22,7 @@
                 </div>
                 <div class='search-bar ml-auto'>
                     <form action='/search' method='GET'>
-                        <input name='movieId' />
+                        <input type="text" name='movieId' placeholder="Enter movie name here">
                         <button type='submit'>Search</button>
                     </form>
                 </div>
@@ -38,6 +38,11 @@
                     </div>
                     <div class="col-xs-12 col-s-12 col-md-6 col-lg-8 col-xl-8">
                         <p class='movie-title-detail'> <%= original_title %> </p>
+                        <div class='row'>
+                        <% for (let i = 0; (genres.length === undefined || i < genres.length); i++) { %>
+                            <p class="genre-item-detail"> <%= genres[i].name %> </p>
+                        <% } %>
+                        </div>
                         <p class='movie-rating-text-detail'>Rating based on <%= vote_count %> votes</p>
                         <div class='row col-12'>
                             <% for (let j = 0; j <= vote_average; j++) { %>

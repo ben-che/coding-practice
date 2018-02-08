@@ -12,13 +12,17 @@
     <!-- Custome Styles -->
     <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
-
-        <form action='/search' method='GET'>
-          <input name='movieId' />
-          <button type='submit'>Search</button>
+    <body class="index-background">
+      <div class="input-field">
+        <h1 class="input-header">BMDB</h1>
+        <p class="index-text text-center text-muted">A quick web app using the free movie database's API to allow users to search for 
+          a movie by it's name and view more information about it. The API key is currently not hard coded into the document,
+        and users will have to supply their own. All credits to the movie database's API, which can be found <a href="https://developers.themoviedb.org/">here</a>. </p>
+        <form  action='/search' method='GET'>
+          <input class="input-text" type="text" name='movieId' placeholder="Enter movie name here" required>
+          <button type='submit' id="submit">Search</button>
         </form>
-
+      </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

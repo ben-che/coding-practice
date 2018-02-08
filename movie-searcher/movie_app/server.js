@@ -1,7 +1,7 @@
 // requires, server creation
 const express = require('express');
 const request = require('request');
-const keys = require('../secretstuff.js');
+const keys = require('../../../secretstuff.js');
 
 const app = express();
 
