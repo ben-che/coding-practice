@@ -9,6 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Montserrat|Open+Sans|Roboto" rel="stylesheet">
 
     <!-- Customs Styles -->
     <link rel="stylesheet" href="/styles.css">
@@ -50,6 +51,12 @@
                             <% } %>
                         </div>
                         <p class='text-muted movie-caption-detail'> <%= overview %> </p>
+                        
+                        <p class='movie-link-detail'>
+                            <a href=<%= "http://www.imdb.com/title/" + imdb_id %>>Visit the Real IMBD Page</a>
+                        </p>
+                        <a href=<%= homepage %>>Movie Homepage</a>
+                     
                     </div>
                 </div>
             </div>

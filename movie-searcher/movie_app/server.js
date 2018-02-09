@@ -19,39 +19,26 @@ app.set('view engine', 'ejs');
 // serving requests
 app.get('/', (req, res) => {
     console.log('hit index route');
-    res.render('index');
+    let movieTrendingUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=' + keys.secrets.movieDbAPI + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1'
+    
+    request(movieTrendingUrl, function (error, response, body) {
+
+        // if there was an error with the back end, or if the api is down
+        if (error) {
+            res.JSON(error);
+        }
+        // everything works
+        else {
+            // initializing an array with all of the movie object results
+            let parsedBody = ((JSON.parse(body)).results);
+            // can use randomIndex to randomly select movies
+            let randomIndex = Math.floor(Math.random() * JSON.parse(body).results.length);
+            res.render('index', {arr:parsedBody})
+            console.log(parsedBody);
+        }       
+    })
 })
 
-// // dummy data
-// function getMovies() {
-//     return [{
-//         title: 'Blade Runner',
-//         year: '1982',
-//         rated: 'R',
-//         released: '25 June 1982',
-//         runtime: '1h 57min',  
-//         genre: 'Sci-Fi, Thriller',
-//         director: 'Ridley Scott',
-//         writer: 'Hampton Fancher, David Peoples',
-//         actors: 'Harrison Ford, Rutger Hauer, Sean Young, Edward James Olmos',
-//         plot: 'A blade runner must pursue and try to terminate four replicants who stole a ship in space and have returned to Earth to find their creator.',
-//         language: 'English',
-//         country: 'USA, Hong Kong'
-//     },
-//     {   title: 'Princess Mononoke',
-//         year: '1997',
-//         rated: 'PG-13',
-//         released: 'October 29, 1999',
-//         runtime: '2h 14min',  
-//         genre: 'Anime',
-//         director: 'Hayao Miyazaki',
-//         writer: 'Hayao Miyazaki',
-//         actors: 'Yōji Matsuda, Yuriko Ishida, Yūko Tanaka',
-//         plot: 'Ashitaka, a prince of the disappearing Ainu tribe, is cursed by a demonized boar god and must journey to the west to find a cure. Along the way, he encounters San, a young human woman fighting to protect the forest, and Lady Eboshi, who is trying to destroy it. Ashitaka must find a way to bring balance to this conflict.',
-//         language: 'Japanese',
-//         country: 'Japan'}
-//     ]}
-    
 // ===============
 // MAIN APP ROUTE
 // ===============
@@ -66,7 +53,7 @@ app.get('/search', (req, res) => {
     // Debugging:
     // console.log(movieID)
 
-    // use api key and combinne it with user's query to get url to return searches
+    // use api key and combine it with user's query to get url to return searches
     let movieDatabaseUrl = 'https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&language=en-US&query='+ movieID + '&api_key=' + keys.secrets.movieDbAPI
 
     // make request to movie database to retrieve all matching titles
@@ -74,15 +61,15 @@ app.get('/search', (req, res) => {
 
         // if user entered a movie not found in database
         if ( (!error) && (((JSON.parse(body).results.length < 1))) ) {
-            // redirect user to 404, or search again page
-            res.send('error');
-            // res.render('404');
+            res.render('404');
             console.log(error);
-            console.log('');
+            // res.send('movie does not exist in database :(');
         }
         // if there was an error with the back end, or if the api is down
         else if (error) {
-            res.JSON(error);
+            res.render('404');
+            console.log(error);
+            // res.send('our api is currently experiencing problems');
         }
         // everything works
         else {
@@ -105,6 +92,7 @@ app.get('/movie/:movieId', (req, res) => {
         //debugging:
         // console.log(body);
         if (error) {
+            res.render(404);
             console.log(error);
         }
         else {
