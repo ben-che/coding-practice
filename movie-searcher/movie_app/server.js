@@ -1,24 +1,33 @@
-// requires, server creation
+// requiring npm packages that this app is dependent on, as well as a set of api keys
 const express = require('express');
 const request = require('request');
+
+// API keys are required here - new users will have to provide their own api keys
 const keys = require('../../../secretstuff.js');
 
+// starting the server and asasigning it to the constant, app
 const app = express();
 
-// ensure server's working, specifiy file locations
+// ensure server's working
 app.listen(8080, () => {
     console.log('Server Started on http://localhost:8080');
     console.log('Press CTRL + C to stop server');
   });
 
+// serve static files from the public folder
 app.use(express.static('public'));
 
 // ejs setup
 app.set('view engine', 'ejs');
 
-// serving requests
+// ===============
+// INDEX APP ROUTE
+// ===============
+// serving requests - this is the index endpoint (the landing page)
 app.get('/', (req, res) => {
-    console.log('hit index route');
+    // console.log('hit index route');
+
+    // movieTrendingUrl is the url to new and popular movies  - this will be rendered on the index page as three pictures
     let movieTrendingUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=' + keys.secrets.movieDbAPI + '&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1'
     
     request(movieTrendingUrl, function (error, response, body) {
@@ -39,9 +48,9 @@ app.get('/', (req, res) => {
     })
 })
 
-// ===============
-// MAIN APP ROUTE
-// ===============
+// =================
+// SEARCH APP ROUTE
+// =================
 // this endpoint is the search endpoint. it takes in a get request from the user and returns search results
 // calls getMovie, an asynch fn
 app.get('/search', (req, res) => {
@@ -82,10 +91,15 @@ app.get('/search', (req, res) => {
     })
 })
 
-// this function is the movie endpoint. it is reached when the user clicks on a search result
+
+// ================
+// MOVIE INFO ROUTE
+// ================
+// this function is the movie endpoint. it is reached when the user clicks on a search result,
+//      and it displays additional information about the movie
 app.get('/movie/:movieId', (req, res) => {
     console.log(req.params);
-    
+    // the url here uses the unique movie id to retrieve more information about that user
     let movieDetailsUrl ='https://api.themoviedb.org/3/movie/' + req.params.movieId + '?api_key=' + keys.secrets.movieDbAPI + '&language=en-US'
 
     request(movieDetailsUrl, (error, response, body) => {
