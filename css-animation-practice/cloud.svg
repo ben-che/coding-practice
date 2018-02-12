@@ -1,0 +1,20 @@
+<svg width="152" height="91" viewBox="0 0 152 91" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="Canvas" transform="translate(420 769)">
+<g id="Group">
+<g id="Rectangle">
+<use xlink:href="#path0_fill" transform="translate(-420 -736.158)" fill="#FFFFFF"/>
+</g>
+<g id="Ellipse">
+<use xlink:href="#path1_fill" transform="translate(-358.533 -769)" fill="#FFFFFF"/>
+</g>
+<g id="Ellipse">
+<use xlink:href="#path2_fill" transform="translate(-395.928 -760.341)" fill="#FFFFFF"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 0 29.0789C 0 13.0191 13.0191 0 29.0789 0L 122.921 0C 138.981 0 152 13.0191 152 29.0789L 152 29.0789C 152 45.1388 138.981 58.1579 122.921 58.1579L 29.0789 58.1579C 13.0191 58.1579 0 45.1388 0 29.0789L 0 29.0789Z"/>
+<path id="path1_fill" d="M 74.0265 36.8023C 74.0265 57.1277 57.4551 73.6046 37.0132 73.6046C 16.5714 73.6046 0 57.1277 0 36.8023C 0 16.477 16.5714 0 37.0132 0C 57.4551 0 74.0265 16.477 74.0265 36.8023Z"/>
+<path id="path2_fill" d="M 69.0499 34.3282C 69.0499 53.2871 53.5925 68.6564 34.5249 68.6564C 15.4573 68.6564 0 53.2871 0 34.3282C 0 15.3693 15.4573 0 34.5249 0C 53.5925 0 69.0499 15.3693 69.0499 34.3282Z"/>
+</defs>
+</svg>

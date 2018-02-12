@@ -1,0 +1,195 @@
+.title {
+    text-align: center;
+    color:white;
+}
+
+.cloud {
+    /* Drawing the cloud: */
+    background: #fff;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
+	
+	-webkit-box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+
+	height: 130px;
+	position: relative;
+    width: 350px;
+
+    z-index: 1;
+
+}
+
+.cloud:after, .cloud:before {
+    /* The before and after pseduoclasses are often used to add additional styling to HTML elements - try:
+
+    p:before {content: 'before pseudoclass text'};
+    p:after {content: 'after pseudoclass text'};
+    
+    to better understand how pseudoclasses work */
+
+    /* Ensures the that the before and after pseudoclasses stay behind our main cloud object */
+
+    background: #fff;
+	content: '';
+	position: absolute;
+	z-index: -1;
+}
+
+.cloud:before {
+    /* Big puffy */
+    -webkit-border-radius: 200px;
+	-moz-border-radius: 200px;
+	border-radius: 200px;
+
+	width: 180px;
+	height: 190px;
+	right: 50px;
+	top: -90px;
+}
+
+.cloud:after {
+    /* Smol puffy */
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
+
+	height: 180px;
+	left: 50px;
+	top: -50px;
+	width: 100px;
+}
+
+/* Make different clouds */
+.c1 {
+    transform:scale(0.5);
+    margin-top:20px;
+}
+
+.c2 {
+    transform:scale(0.55);
+    margin-top:4px;
+}
+
+.c3 {
+    transform:scale(0.6);
+    margin-top:5px;
+}
+.c4 {
+    transform:scale(0.45);
+    margin-top:3px;
+}
+.c5 {
+    transform:scale(0.55);
+    margin-top:2px;
+}
+
+
+/* Cloud Animations */
+.cloud-animation-1 {
+    -webkit-animation: cloud-slide-reverse 20s linear infinite;
+	-moz-animation: cloud-slide-reverse 20s linear infinite ;
+    animation: cloud-slide-reverse 20s linear infinite;
+}
+
+.cloud-animation-2 {
+    -webkit-animation: cloud-slide 17s linear infinite;
+	-moz-animation: cloud-slide 17s linear infinite ;
+    animation: cloud-slide 17s linear infinite;
+}
+
+.cloud-animation-3 {
+    -webkit-animation: cloud-slide-reverse 27s linear infinite;
+	-moz-animation: cloud-slide-reverse 27s linear infinite ;
+    animation: cloud-slide-reverse 27s linear infinite;
+}
+
+.cloud-animation-4 {
+    -webkit-animation: cloud-slide 19s linear infinite;
+	-moz-animation: cloud-slide 19s linear infinite ;
+    animation: cloud-slide 19s linear infinite;
+}
+.cloud-animation-5 {
+    -webkit-animation: cloud-slide 30s linear infinite;
+	-moz-animation: cloud-slide 30s linear infinite ;
+    animation: cloud-slide 30s linear infinite;
+}
+
+@keyframes cloud-slide {
+    0% {
+        /* Hide the cloud - this means the cloud will behind -100% of the screen at the beginning of the animation */
+      margin-left: -10%;
+    }
+    100% {
+        /* Center the cloud - at the end of the animation, the cloud will end up in the middle, as defined in the class */
+     margin-left: 100%;
+    }
+}
+
+@keyframes cloud-slide-reverse {
+    0% {
+        /* Hide the cloud - this means the cloud will behind -100% of the screen at the beginning of the animation */
+      margin-left: 90%;
+    }
+    100% {
+        /* Center the cloud - at the end of the animation, the cloud will end up in the middle, as defined in the class */
+     margin-left: -10%;
+    }
+}
+
+.arrow-down {
+    width: 0; 
+    height: 0; 
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    
+    border-top: 20px solid #fff;
+    margin-left:auto;
+    margin-right:auto;
+
+    opacity:0.7;
+
+    animation: 1s arrow-shake-1 0s linear infinite;
+
+}
+
+.arrow-down-2 {
+    width: 0; 
+    height: 0; 
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    
+    border-top: 20px solid #ddd;
+    margin-left:auto;
+    margin-right:auto;
+
+    opacity:0.8;
+
+    animation: 1s arrow-shake-2 0s linear infinite;
+}
+
+@keyframes arrow-shake-1 {
+    0% {
+        margin-top:1px;
+    }
+    50% {
+        margin-top:5px;
+    }
+    100% {
+        margin-top:1px;
+    }
+}
+
+@keyframes arrow-shake-2 {
+    0% {
+        margin-top:5px;
+    }
+    50% {
+        margin-top:1px;
+    }
+    100% {
+        margin-top:5px;
+    }
+}
