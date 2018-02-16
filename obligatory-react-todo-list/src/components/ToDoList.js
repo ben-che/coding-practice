@@ -16,11 +16,13 @@ class ItemList extends Component {
                              key = {element.key} 
                              hide = {element.hide}
                             //  pass the updateChecked function as a prop
-                             updateChecked = {this.props.updateChecked} />
+                             updateChecked = {this.props.updateChecked}
+                              />
+                             
         })
 
         return (
-            <ul className="list-group">
+            <ul className="row">
                 {taskListJSX}
             </ul>
         )

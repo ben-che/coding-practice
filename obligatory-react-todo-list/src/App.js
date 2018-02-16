@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
-import './App.css';
 import ToDoList from './components/ToDoList';
 import TaskInput from './components/TaskInput'
 import ListActions from './components/ListActions'
+import Counter from './components/Counter'
 
 
 class App extends Component {
@@ -44,7 +44,12 @@ class App extends Component {
       }
     ],
     keyGen: 4,
-    filter: 'all'
+    filter: 'all',
+    counter: {
+      all: 4,
+      active: 3,
+      complete: 1
+    }
   }}
   
   // updateChecked will allow users to visually change the completeness of a task
@@ -54,19 +59,38 @@ class App extends Component {
     // to do this, a copy of the list needs to be made
     // in this copy, the function must find which todo object's state is being changed
     // this is accomplished by matching the key parameter with the index number of the todo object
+
+    // also, create variables so that the counter state can be appropriately updated
+    let updatedActive = this.state.counter.active;
+    let updatedComplete = this.state.counter.complete;
+
     let updatedList = Array.from(this.state.tasks).map((element) => {
       let todoItem = element;
       
       if (todoItem.key === key) {
+        // updating new counter variables
+        if (todoItem.complete) {
+          updatedActive = updatedActive + 1;
+          updatedComplete = updatedComplete -1;
+        }
+        else if (!todoItem.complete) {
+          updatedActive = updatedActive - 1;
+          updatedComplete = updatedComplete + 1;
+        }
         todoItem.complete = !todoItem.complete;
       }
       return todoItem;
     });
       // set the old parameters of tasks to the new parameters included in the updatedList
       this.setState({
-        tasks: updatedList
+        tasks: updatedList,
+        counter: {
+          all: this.state.counter.all,
+          active: updatedActive,
+          complete: updatedComplete
+        }
       });
-
+    
   }
 
   // taskSubmit is a handler that takes a description of the task the user wants to add
@@ -89,7 +113,11 @@ class App extends Component {
     this.setState({
       tasks:taskCopy,
       keyGen: this.state.keyGen + 1,
-
+      counter: {
+        all: this.state.counter.all + 1,
+        active: this.state.counter.active + 1,
+        complete: this.state.counter.complete
+      }
     })
   }
 
@@ -106,7 +134,12 @@ class App extends Component {
     })
     // update states by giving it a new array of only unfinished tasks
     this.setState({
-      tasks: incompleteTasks
+      tasks: incompleteTasks,
+      counter: {
+        all: this.state.counter.all - this.state.counter.complete,
+        active: this.state.counter.active,
+        complete: 0
+      }
     })
   }
 
@@ -165,21 +198,35 @@ class App extends Component {
   this.setState({
     tasks: updatedList
   });
-  }}
+}}
 
   render() {
 
     return (
-      <div className='container'>
-
-        <h1 className="text-center">To Dos</h1>
-
-          <TaskInput taskSubmit={this.taskSubmit}/>
+      <div className="height-100">
+      
+        {/* Fixed Header - contains title and form input and list actions */}
         
+        <div className='header--fixed'>
+
+          <h1 className="text-center">sticky notes</h1>
+          <Counter counter={this.state.counter} />
+          <div className='container'>
+            <div className='row'>
+             
+                <TaskInput taskSubmit={this.taskSubmit}/>
+      
+                <ListActions filter={this.state.filter} clearComplete={this.clearComplete} filterTasks={this.filterTasks} completenessCounter={this.state.counter}/>
+           
+            </div>
+          </div>
+        </div>
+
+        <div className='container sticky-notes--body'>
+
           <ToDoList tasks={this.state.tasks} updateChecked={this.updateChecked} />
 
-          <ListActions filter={this.state.filter} clearComplete={this.clearComplete} filterTasks={this.filterTasks}/>
-
+        </div>
       </div>
       
     );

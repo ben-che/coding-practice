@@ -30,7 +30,7 @@ class TaskInput extends Component {
                     <span className="input-group-btn">
                         <button className="btn btn-primary" type="submit">Add</button>
                     </span>
-                    <input className="form-control" placeholder="Add a task" value={this.state.val} onChange={this.textChangeHandler} />
+                    <input className="form-control" placeholder="Add a task" value={this.state.val} onChange={this.textChangeHandler} required />
                 </div>
             </form>
         )

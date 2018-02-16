@@ -1,8 +1,142 @@
+/* Global styles */
+html,body {
+  width:100%;
+  height:100%;
+}
+
+li {
+  font-size:20px;
+}
+
+.height-100 {
+  height:100%;
+}
+
+/* Title component */
+.header--fixed {
+  position: fixed;
+  top:0;
+  width:100%;
+  min-height:20vh;
+  background-color: #eee;
+  box-shadow: 0px 1px 3px 3px #333;
+  z-index: 999;
+}
+
+/* Sticky note component */
+
+/* Tilting stickies */
+ul div{
+  -webkit-transform:rotate(-3.5deg);
+  -o-transform:rotate(-3.5deg);
+  -moz-transform:rotate(-3.5deg);
+}
+
+ul div:nth-child(even) {
+  -o-transform:rotate(4deg);
+  -webkit-transform:rotate(4deg);
+  -moz-transform:rotate(4deg);
+  position:relative;
+  top:5px;
+  background:#feff9c;
+}
+ul div:nth-child(3n) {
+  -o-transform:rotate(-3deg);
+  -webkit-transform:rotate(-3deg);
+  -moz-transform:rotate(-3deg);
+  position:relative;
+  top:-5px;
+  background: #7afcff;
+}
+ul div:nth-child(4n) {
+  -o-transform:rotate(5deg);
+  -webkit-transform:rotate(5deg);
+  -moz-transform:rotate(5deg);
+  position:relative;
+  top:-10px;
+  background: #ff7eb9;
+}
+
+/* Main sticky containter */
+.sticky-note--container {
+  width: 270px;
+  height:260px;
+  background-color:yellow;
+  margin:10px 50px;
+  padding:30px;
+  /* shadows */
+  box-shadow: 2px 2px 6px 3px #ddd;
+
+}
+.tape {
+  position:absolute;
+  width:30px;
+  height:50px;
+  transform: translate(95px, -160%);
+  -webkit-transform: translate(95px, -130%);
+  -moz-transform: translate(95px, -130%);
+  -o-transform: translate(95px, -130%);
+  -ms-transform: translate(95px, -130%);
+  background-color:grey;
+  opacity:0.4;
+}
+
+
+.sticky-note--liststyle {
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.sticky-notes--body {
+  padding-top:30vh;
+}
+
+/* Strikethrough animation */
 .done {
-  text-decoration: line-through;
-  color: grey;
+  position: relative;
+}
+
+.done:after {
+  content: ' ';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: black;
+  color:#333;
+  border-radius:50%;
+  -webkit-transform:rotate(-1deg);
+  -moz-transform:rotate(-1deg);
+  -ms-transform:rotate(-1deg);
+  -o-transform:rotate(-1deg);
+  transform:rotate(-1deg);
+  animation-name: done;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes done{
+  0%   { width : 0; opacity:0.2;}
+  50% { width: 80%; }
+  100% { width:100%; opacity:1;}
+}
+
+/* Make the actual checkbox disappear*/
+.todoitem--hideCheckbox {
+  opacity: 0;
 }
 
 .hidden {
   display:none;
+}
+
+/* Counter Component */
+.counter--component {
+  bottom:0;
+  position:fixed;
+  display:block;
 }
