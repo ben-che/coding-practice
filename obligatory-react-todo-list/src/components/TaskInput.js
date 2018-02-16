@@ -22,7 +22,10 @@ class TaskInput extends Component {
 
     render() {
         return (
-            <form onSubmit={(event)=>{this.props.taskSubmit(event, this.state.val)}}>
+            // on form submit, pass event and value to handler and clear text
+            <form onSubmit={(event)=>{this.props.taskSubmit(event, this.state.val); 
+                                      this.setState({val:''});
+                                      }}>
                 <div className="input-group">
                     <span className="input-group-btn">
                         <button className="btn btn-primary" type="submit">Add</button>
@@ -33,7 +36,5 @@ class TaskInput extends Component {
         )
     }
 }
-
-
 
 export default TaskInput

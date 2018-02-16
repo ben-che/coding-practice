@@ -4,7 +4,7 @@ class ToDoItem extends Component {
 
     render() {
         // task completion logic:
-        let done, checked;  
+        let done, checked, hidden;
 
         let finished = this.props.complete;
         if (finished) {
@@ -16,8 +16,18 @@ class ToDoItem extends Component {
             checked=""
         }
 
+        // filter logic:
+        // set display to none if filter conditions are true
+        let hideMe = this.props.hide;
+        if (hideMe) {
+            hidden =' hidden';
+        }
+        else if (!hideMe) {
+            hidden = '';
+        }
+
         return (
-            <li className='list-group-item'>
+            <li className={'list-group-item' + hidden}>
                 {/* if the checkbox value gets changed, this specific item's id will be passed to updateChecked
                     for comparison and eventual state update */}
                 <input type='checkbox' value='on' checked={checked} onChange={() => {this.props.updateChecked(this.props.id)}} />

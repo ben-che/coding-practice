@@ -14,6 +14,7 @@ class ItemList extends Component {
                              complete = {element.complete}
                              id = {element.key}
                              key = {element.key} 
+                             hide = {element.hide}
                             //  pass the updateChecked function as a prop
                              updateChecked = {this.props.updateChecked} />
         })

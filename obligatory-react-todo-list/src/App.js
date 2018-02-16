@@ -21,25 +21,30 @@ class App extends Component {
         [{
         description: "get milk",
         complete: false,
-        key: 0
+        key: 0,
+        hide:false
       },
       {
         description: "get eggs",
         complete: false,
-        key: 1
+        key: 1,
+        hide:false
       },
       {
         description: "fix laptop",
         complete: false,
-        key: 2
+        key: 2,
+        hide:false
       },
       {
         description: "pick up mail",
         complete: true,
-        key: 3
+        key: 3,
+        hide:false
       }
     ],
-    keyGen: 4
+    keyGen: 4,
+    filter: 'all'
   }}
   
   // updateChecked will allow users to visually change the completeness of a task
@@ -73,7 +78,8 @@ class App extends Component {
     // use a variable to hold the new task's parameters as an object
     let newTask = { description: desc,
                       complete: false,
-                      key: this.state.keyGen
+                      key: this.state.keyGen,
+                      hide:false
                   }
     // create a copy of tasks and push new item to end of array
     let taskCopy = Array.from(this.state.tasks)
@@ -82,7 +88,8 @@ class App extends Component {
     // update the tasks in the state object, add 1 to keyGen so that values are unique
     this.setState({
       tasks:taskCopy,
-      keyGen: this.state.keyGen + 1
+      keyGen: this.state.keyGen + 1,
+
     })
   }
 
@@ -103,7 +110,65 @@ class App extends Component {
     })
   }
 
+  // filterTasks is an event handler that filters the list of tasks by completion
+  filterTasks = (event) => {
+
+    this.setState({filter: event.target.value});
+
+    let filter = event.target.value
+    console.log(filter)
+
+    if (filter === 'all') {
+      let updatedList = Array.from(this.state.tasks).map((element) => {
+      let todoItem = element;
+
+      todoItem.hide = false;
+      return todoItem;
+    });
+
+    this.setState({
+      tasks: updatedList
+    });
+    }
+    else if (filter === 'active') {
+      let updatedList = Array.from(this.state.tasks).map((element) => {
+      let todoItem = element;
+      
+      if (!todoItem.complete) {
+        todoItem.hide = false;
+      }
+      else {
+        todoItem.hide=true;
+      }
+      
+      return todoItem;
+    });
+
+    this.setState({
+      tasks: updatedList
+    });
+  }
+  else if (filter === 'complete') {
+    let updatedList = Array.from(this.state.tasks).map((element) => {
+    let todoItem = element;
+    
+    if (todoItem.complete) {
+      todoItem.hide = false;
+    }
+    else {
+      todoItem.hide=true;
+    }
+    
+    return todoItem;
+  });
+
+  this.setState({
+    tasks: updatedList
+  });
+  }}
+
   render() {
+
     return (
       <div className='container'>
 
@@ -113,7 +178,7 @@ class App extends Component {
         
           <ToDoList tasks={this.state.tasks} updateChecked={this.updateChecked} />
 
-          <ListActions clearComplete={this.clearComplete} />
+          <ListActions filter={this.state.filter} clearComplete={this.clearComplete} filterTasks={this.filterTasks}/>
 
       </div>
       
