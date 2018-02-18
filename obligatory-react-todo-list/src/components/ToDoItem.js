@@ -28,7 +28,7 @@ class ToDoItem extends Component {
 
         return (
             // Made the entirety of the list item clickable as opposed to just the checkbox or label for usability reasons
-            <div className={"sticky-note--container col-md-3" + hidden} onClick={() => {this.props.updateChecked(this.props.id)}}>
+            <div className={"sticky-note--container col-md-4" + hidden} onClick={() => {this.props.updateChecked(this.props.id)}}>
                 <div className='tape'></div>
                 <li className='sticky-note--liststyle text-center' >
                         {/* if the checkbox value gets changed, this specific item's id will be passed to updateChecked

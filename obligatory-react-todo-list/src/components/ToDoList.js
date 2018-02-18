@@ -22,9 +22,12 @@ class ItemList extends Component {
         })
 
         return (
-            <ul className="row">
-                {taskListJSX}
-            </ul>
+            <div className='sticky-notes--body sticky--body--center'>
+
+                <ul className="row">
+                    {taskListJSX}
+                </ul>
+            </div>
         )
     }
 }

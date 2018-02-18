@@ -26,11 +26,13 @@ class TaskInput extends Component {
             <form onSubmit={(event)=>{this.props.taskSubmit(event, this.state.val); 
                                       this.setState({val:''});
                                       }}>
-                <div className="input-group">
-                    <span className="input-group-btn">
-                        <button className="btn btn-primary" type="submit">Add</button>
+                <div className="">
+                <input className="form-control header--inputform--box text-center" placeholder="enter new rule" value={this.state.val} onChange={this.textChangeHandler} required maxlength="30"/>
+                    <span className="input-group-btn text-center">
+                        <button className="header--inputform--submit" type="submit" value="Add">add rule</button>
+                        
                     </span>
-                    <input className="form-control" placeholder="Add a task" value={this.state.val} onChange={this.textChangeHandler} required />
+                    
                 </div>
             </form>
         )

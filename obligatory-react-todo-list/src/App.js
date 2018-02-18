@@ -19,25 +19,25 @@ class App extends Component {
       // init tasks with items as test data
       tasks : 
         [{
-        description: "get milk",
+        description: "one: dont pick up the phone (hes only calling cuz hes drunk and alone)",
         complete: false,
         key: 0,
         hide:false
       },
       {
-        description: "get eggs",
+        description: "two: don't let him in (you'll have to kick him out again)",
         complete: false,
         key: 1,
         hide:false
       },
       {
-        description: "fix laptop",
+        description: "three: don't be his friend (you know you'll wake up in his bed in the morning)",
         complete: false,
         key: 2,
         hide:false
       },
       {
-        description: "pick up mail",
+        description: "and if you get under him, you aint gettin over him",
         complete: true,
         key: 3,
         hide:false
@@ -204,30 +204,21 @@ class App extends Component {
 
     return (
       <div className="height-100">
-      
         {/* Fixed Header - contains title and form input and list actions */}
-        
         <div className='header--fixed'>
-
-          <h1 className="text-center">sticky notes</h1>
-          <Counter counter={this.state.counter} />
+          <h3 className="text-center">to don't list</h3>
           <div className='container'>
             <div className='row'>
-             
                 <TaskInput taskSubmit={this.taskSubmit}/>
-      
                 <ListActions filter={this.state.filter} clearComplete={this.clearComplete} filterTasks={this.filterTasks} completenessCounter={this.state.counter}/>
-           
             </div>
           </div>
         </div>
 
-        <div className='container sticky-notes--body'>
-
+        {/* Sticky Notes and Counter Component */}
           <ToDoList tasks={this.state.tasks} updateChecked={this.updateChecked} />
-
+          <Counter counter={this.state.counter} />
         </div>
-      </div>
       
     );
   }

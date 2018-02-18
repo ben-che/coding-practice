@@ -2,14 +2,16 @@
 html,body {
   width:100%;
   height:100%;
-}
-
-li {
-  font-size:20px;
+  background:url('https://cdn.pixabay.com/photo/2015/10/09/16/05/legal-pad-979558_1280.png'), fixed, no-repeat;
+  background-size:cover;
 }
 
 .height-100 {
   height:100%;
+}
+
+h3 {
+  color: #fff;
 }
 
 /* Title component */
@@ -17,11 +19,101 @@ li {
   position: fixed;
   top:0;
   width:100%;
-  min-height:20vh;
-  background-color: #eee;
-  box-shadow: 0px 1px 3px 3px #333;
-  z-index: 999;
+  min-height:15vh;
+  background-color: #8B4513;
+  z-index: 2;
+  padding-bottom: 30px;
+  box-shadow: 2px 2px 6px 3px #ddd;
 }
+
+/* Input Form Component */
+.header--inputform--box {
+  border: 0;
+  outline: 0;
+  max-width:20%;
+  color:white;
+  background: transparent;
+  border-bottom: 1px solid white;
+  border-radius:0;
+  box-shadow: none;
+  transition: all 0.3s linear;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.header--inputform--box:focus {
+  color:white;
+  max-width:50%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 2px solid white;
+  border-radius:0;
+  box-shadow: none;
+}
+
+.header--inputform--submit {
+  color: #eee;
+  margin-top:20px;
+  margin-left:auto;
+  margin-right:auto;
+  background: none;
+  border: 2px solid #ddd;
+  padding:10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  
+}
+
+.header--inputform--clearfinished {
+  color: #eee;
+  margin-top:10px;
+  margin-bottom:10px;
+  margin-left:auto;
+  margin-right:auto;
+  background: none;
+  border: 1px solid rgba(140, 2, 2, 0.9);
+  background-color:rgba(140, 2, 2, 0.9);
+  padding:10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.header--inputform--centerbutton {
+  margin:5px auto;
+  display:block;
+}
+/* Counter Component */
+
+.counter--component--container{
+  padding:15px;
+  margin-top:50px;
+  margin-bottom:20px;
+  border:solid thin #333;
+  width:auto;
+  max-width:350px;
+  margin-left:auto;
+  margin-right:auto;
+  background-color: rgba(0, 0, 50, 0.2);
+}
+
+.counter--component--list {
+  list-style-type: none;
+  display: inline-block;
+  margin-left:30px;
+  font-size:18px;
+}
+
 
 /* Sticky note component */
 
@@ -58,11 +150,17 @@ ul div:nth-child(4n) {
 }
 
 /* Main sticky containter */
+.sticky--body--center{
+  margin-left:auto;
+  margin-right:auto;
+}
+
 .sticky-note--container {
   width: 270px;
   height:260px;
   background-color:yellow;
   margin:10px 50px;
+  margin-left:5vw;
   padding:30px;
   /* shadows */
   box-shadow: 2px 2px 6px 3px #ddd;
@@ -81,15 +179,15 @@ ul div:nth-child(4n) {
   opacity:0.4;
 }
 
-
 .sticky-note--liststyle {
   list-style:none;
+  font-size:20px;
   padding:0;
   margin:0;
 }
 
 .sticky-notes--body {
-  padding-top:30vh;
+  padding-top:40vh;
 }
 
 /* Strikethrough animation */
@@ -107,11 +205,11 @@ ul div:nth-child(4n) {
   background: black;
   color:#333;
   border-radius:50%;
-  -webkit-transform:rotate(-1deg);
-  -moz-transform:rotate(-1deg);
-  -ms-transform:rotate(-1deg);
-  -o-transform:rotate(-1deg);
-  transform:rotate(-1deg);
+  -webkit-transform:rotate(-15deg);
+  -moz-transform:rotate(-15deg);
+  -ms-transform:rotate(-15deg);
+  -o-transform:rotate(-15deg);
+  transform:rotate(-15deg);
   animation-name: done;
   animation-duration: 0.5s;
   animation-timing-function: linear;
@@ -132,11 +230,4 @@ ul div:nth-child(4n) {
 
 .hidden {
   display:none;
-}
-
-/* Counter Component */
-.counter--component {
-  bottom:0;
-  position:fixed;
-  display:block;
 }

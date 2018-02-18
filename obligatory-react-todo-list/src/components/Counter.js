@@ -25,10 +25,10 @@ class Counter extends Component {
     render() {
         
         return (
-            <ul className="counter--container">
-                <li>All: {this.props.counter.all}</li>
-                <li>Active: {this.props.counter.active}</li>
-                <li>Complete: {this.props.counter.complete}</li>
+            <ul className="counter--component--container">
+                <li className="counter--component--list">All: {this.props.counter.all}</li>
+                <li className="counter--component--list">Active: {this.props.counter.active}</li>
+                <li className="counter--component--list">Complete: {this.props.counter.complete}</li>
             </ul>
         )
     }
