@@ -1,0 +1,43 @@
+/* Global Styles */
+
+.section-container {
+    height:100vh;
+    width:100vw;
+}
+
+/* Section 1 - Basic CSS Animations */
+
+/* Basics include "animation" and "keyframes" - all css animations revolve around these two properties:
+        the animation property defines the different behaviours of the animation itself, while
+        keyframes allows the user to pinpoint how fast or slow different parts of the animation will execute */
+
+/* The animation CSS property is a shorthand property for the various animation properties: 
+animation-name: the name of the animation that you want to apply to the html object 
+animation-duration: the total time it takes for the animation to start and finish
+animation-timing-function: how the animation progresses during the duration - can be defined with built in keywords such as
+    "linear, ease-in, ease-out", with cubic-bezier functions, steps, or the most popular - keyframes
+animation-delay: wait x amount of time before the animation begins - this delay begins only when the element is first loaded
+animation-iteration-count: how many times the animation should play before it stops - infinite can be specified to keep the
+    animation going
+animation-direction: specifies which way an animation should be played - values include normal, reverse, alternate or alternate-reverse
+animation-fill-mode: specifies how CSS animation properties should be applied to its target before and after its execution
+and animation-play-state: allows the user to pause an animation at a specific time (through the use of keyframes) - 
+    it only have two major values - running and paused
+     
+The entirety of this can be condensed onto one line:
+animation: duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name  */
+
+/* Section 1 Example 1 */
+
+.section-one---container___loading-bar {
+    background-color: #333;
+    height:30px;
+    width:100%;
+    transform-origin: left center;
+    animation: 3s ease-in 1s 1 normal both running loading;
+}
+
+@keyframes loading {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
