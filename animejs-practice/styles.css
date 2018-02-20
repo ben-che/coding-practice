@@ -37,7 +37,151 @@ animation: duration | timing-function | delay | iteration-count | direction | fi
     animation: 3s ease-in 1s 1 normal both running loading;
 }
 
+/* scaleX scales the element on the horizontal axis by a factor of the argument the user gives it */
 @keyframes loading {
     from { transform: scaleX(0); }
     to   { transform: scaleX(1); }
   }
+
+  /* Section 1 Example 2 - Clouds */
+
+  /* Cloud CSS */
+  .cloud {
+    /* Drawing the cloud: */
+    background: #fff;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
+	
+	-webkit-box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+
+	height: 130px;
+	position: relative;
+    width: 350px;
+
+    z-index: 1;
+
+}
+
+.cloud:after, .cloud:before {
+    /* The before and after pseduoclasses are often used to add additional styling to HTML elements - try:
+
+    p:before {content: 'before pseudoclass text'};
+    p:after {content: 'after pseudoclass text'};
+    
+    to better understand how pseudoclasses work */
+
+    /* Ensures the that the before and after pseudoclasses stay behind our main cloud object */
+
+    background: #fff;
+	content: '';
+	position: absolute;
+	z-index: -1;
+}
+
+.cloud:before {
+    /* Big puffy */
+    -webkit-border-radius: 200px;
+	-moz-border-radius: 200px;
+	border-radius: 200px;
+
+	width: 180px;
+	height: 190px;
+	right: 50px;
+	top: -90px;
+}
+
+.cloud:after {
+    /* Smol puffy */
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
+
+	height: 180px;
+	left: 50px;
+	top: -50px;
+	width: 100px;
+}
+
+/* Make different clouds - we can change the opacity, size and speed of certain clouds to make them appear to be in the distance*/
+.c1 {
+    transform:scale(0.5);
+    margin-top:20px;
+}
+
+/* background cloud */
+.c2 {
+    transform:scale(0.15);
+    opacity:0.2;
+}
+
+.c3 {
+    transform:scale(0.6);
+    margin-top:5px;
+}
+
+/* background clouds */
+.c4 {
+    transform:scale(0.10);
+    opacity:0.3;
+}
+.c5 {
+    transform:scale(0.20);
+    opacity:0.3;
+    
+}
+
+
+/* Cloud Animations */
+.cloud-animation-1 {
+    -webkit-animation: cloud-slide-reverse 20s linear infinite;
+	-moz-animation: cloud-slide-reverse 20s linear infinite ;
+    animation: cloud-slide-reverse 20s linear infinite;
+}
+
+.cloud-animation-2 {
+    -webkit-animation: cloud-slide 60s linear infinite;
+	-moz-animation: cloud-slide 60s linear infinite ;
+    animation: cloud-slide 60s linear infinite;
+}
+
+.cloud-animation-3 {
+    -webkit-animation: cloud-slide-reverse 27s linear infinite;
+	-moz-animation: cloud-slide-reverse 27s linear infinite ;
+    animation: cloud-slide-reverse 27s linear infinite;
+}
+
+.cloud-animation-4 {
+    -webkit-animation: cloud-slide 46s linear infinite;
+	-moz-animation: cloud-slide 46s linear infinite ;
+    animation: cloud-slide 46s linear infinite;
+}
+.cloud-animation-5 {
+    -webkit-animation: cloud-slide-reverse 40s linear infinite;
+	-moz-animation: cloud-slide-reverse 40s linear infinite ;
+    animation: cloud-slide-reverse 40s linear infinite;
+}
+
+@keyframes cloud-slide {
+    0% {
+        /* Hide the cloud - this means the cloud will behind -100% of the screen at the beginning of the animation */
+      margin-left: -10%;
+    }
+    100% {
+        /* Center the cloud - at the end of the animation, the cloud will end up in the middle, as defined in the class */
+     margin-left: 100%;
+    }
+}
+
+@keyframes cloud-slide-reverse {
+    0% {
+        /* Hide the cloud - this means the cloud will behind -100% of the screen at the beginning of the animation */
+      margin-left: 90%;
+    }
+    100% {
+        /* Center the cloud - at the end of the animation, the cloud will end up in the middle, as defined in the class */
+     margin-left: -10%;
+    }
+}
