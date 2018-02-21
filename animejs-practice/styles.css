@@ -27,6 +27,9 @@ and animation-play-state: allows the user to pause an animation at a specific ti
 The entirety of this can be condensed onto one line:
 animation: duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name  */
 
+/* Section 1 animation CSS examples: */
+
+
 /* Section 1 Example 1 */
 
 .section-one---container___loading-bar {
@@ -43,22 +46,57 @@ animation: duration | timing-function | delay | iteration-count | direction | fi
     to   { transform: scaleX(1); }
   }
 
-  /* Section 1 Example 2 - Clouds */
+/* Section 1 Example 2  */
+/* We can change up the keyframes to specify the behaviour of the loading bar */
 
-  /* Cloud CSS */
-  .cloud {
+/* This class is identical to the one above, except the animation keyframes are different values
+    Question: When will this animation finish? Before, after or at the same time the first animation finishes? */
+.section-one---container___loading-bar-2 {
+    background-color: #333;
+    height:30px;
+    width:100%;
+    transform-origin: left center;
+    animation: 10s ease-in 1s 1 normal both running loading-2;
+}
+
+@keyframes loading-2 {
+    /* at 0 seconds, width is 0% */
+    0% {
+        width:0%;
+    }
+    /* at 5 seconds, width is 25% */
+    50% {
+        width:25%;
+    }
+    /* at 7.5 seconds, width is 75% */
+     75% {
+         width: 30%;
+     }
+     /* at 10 seconds, width is 100% */
+     100% {
+         width: 100%
+     }
+}
+
+
+/* Section 1 Example 3 - Clouds */
+
+/* Using what we learned above, we can create simple animations - below is code to animate clouds in a sky */
+
+/* Cloud CSS */
+.cloud {
     /* Drawing the cloud: */
     background: #fff;
-	-webkit-border-radius: 100px;
-	-moz-border-radius: 100px;
-	border-radius: 100px;
-	
-	-webkit-box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
-	-moz-box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
-	box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
 
-	height: 130px;
-	position: relative;
+    -webkit-box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+
+    height: 130px;
+    position: relative;
     width: 350px;
 
     z-index: 1;
@@ -105,7 +143,7 @@ animation: duration | timing-function | delay | iteration-count | direction | fi
 	width: 100px;
 }
 
-/* Make different clouds - we can change the opacity, size and speed of certain clouds to make them appear to be in the distance*/
+/* Make different clouds - we can change the opacity, size and speed of certain clouds to make them seem further or closer */
 .c1 {
     transform:scale(0.5);
     margin-top:20px;
@@ -130,7 +168,6 @@ animation: duration | timing-function | delay | iteration-count | direction | fi
 .c5 {
     transform:scale(0.20);
     opacity:0.3;
-    
 }
 
 
@@ -164,6 +201,7 @@ animation: duration | timing-function | delay | iteration-count | direction | fi
     animation: cloud-slide-reverse 40s linear infinite;
 }
 
+/* Defining the keyframes for clouds */
 @keyframes cloud-slide {
     0% {
         /* Hide the cloud - this means the cloud will behind -100% of the screen at the beginning of the animation */
