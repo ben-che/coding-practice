@@ -46,8 +46,8 @@ class App extends Component {
           <Link to='/shop'>Shop</Link>
         </nav>
         <Switch>
-          <Route path='/' exact render={(props) => ( <Home storeUser={this.storeUser} username={this.state.user.name} {...props} /> )} />
-          <Route path='/shop' component={Shop} />
+          <Route path='/' exact render={(props) => ( <Home storeUser={this.storeUser} {...props} /> )} />
+          <Route path='/shop' render= { (props) => ( <Shop username={this.state.user.name} {...props} /> )} />
         </Switch>
       </div>
     );
