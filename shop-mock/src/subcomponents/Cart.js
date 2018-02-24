@@ -8,11 +8,12 @@ class Cart extends Component {
         //      is renderable by react
         let cartJSX = cart.map( (element) => {
             return (
-                <div key={element.key}>
-                    <h3> {element.name} </h3>
-                    <img src={element.picture} alt=""/>
-                    <p> {element.desc} </p>
-                    <p> {element.price} </p>
+                <div className='row' key={element.key}>
+                    <p className='text-left'> {element.name} </p>
+                    {/* <img src={element.picture} alt=""/> */}
+                    {/* <p> {element.desc} </p> */}
+                    <p>. - $</p>
+                    <p className='text-right'> {element.price} </p>
                 </div>
             )
         })
@@ -35,7 +36,7 @@ class Cart extends Component {
             <div>
                 {/* {console.log(cart)} */}
             {/* {console.log(cartJSX)} */}
-                <h1>Your Cart</h1>
+                <h3 className='text-muted'>Your Cart</h3>
                 <p>Total Cost: {totalCost}</p>
                 {cartJSX}
             </div>

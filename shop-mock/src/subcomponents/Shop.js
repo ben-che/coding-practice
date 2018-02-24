@@ -93,7 +93,6 @@ class Shop extends Component {
     // invoke updateProduct before component mounts
     componentWillMount() {
         this.updateProduct();
-
     }
     
     // invoke syncCart whenever this component mounts
@@ -112,21 +111,72 @@ class Shop extends Component {
         // Allow match to be passed through props from the App.js component
         const {match} = this.props;
 
+        // Styles
+        let shopContainer = {
+            'paddingLeft': '5vw',
+            'paddingTop': '8vh',
+            'width':'100vw',
+            'height':'auto'
+        }
+
+        // let sideNav = {
+        //     "height":"100vh",
+        //     "paddingTop":"5vh",
+        //     "width":"50px",
+        //     "backgroundColor":"#eee",
+        //     "position":"fixed",
+        //     "top":"5vh",
+        // }
+
+        let sideNavLink = {
+            // "height":"50px",
+            // "width":"50px",
+            'display': 'block',
+            // "backgroundColor" : "#666",
+            'marginBottom':"1px"
+        }
+
+        let shopTitleContainer = {
+            'width': '100%',
+            'textAlign':'left',
+            'padding' : '2vh 5vw'
+        }
+
+        let itemContainer = {
+            'width':'75%',
+            'margin':'0px 5vw'
+        }
+
+        let cartContainer = {
+            'marginTop':'20vh',
+            'height':'100%'
+        }
         return (
-            <div>
-                <h1>Shop</h1>
-                <h2> Welcome {this.props.username} </h2>
-                <nav>
-                    <Link to={match.url + '/hats'}>Hats</Link>
-                    <Link to={match.url + '/shoes'}>Shoes</Link>
-                    <button onClick={this.logOut}>Log out</button>
+            <div style={shopContainer}>
+             <div className='row'>
+                <nav className = 'col-s-2 h-100'>
+                <p className='text-muted' >{'Welcome ' + this.props.username}</p>
+                    <h3 className='text-muted'>Shop</h3>
+                    <Link style={sideNavLink} to={match.url + '/hats'}>Hats</Link>
+                    <Link style={sideNavLink} to={match.url + '/shoes'}>Shoes</Link>
+
+                    <div style={cartContainer}>
+                        <Cart data={this.state.cart} cartTotal={this.state.cartTotal} />
+                        <button onClick={this.logOut}>Log out</button>
+                    </div>
                 </nav>
-                <Switch>
-                    {/* Pass additional props to each of these rendered components */}
-                    <Route path={match.url + '/hats'} render={(props) => ( <Hats data={this.state.products[0]} addToCart={this.addToCart} {...props} /> )} />
-                    <Route path={match.url + '/shoes'} render={ (props) => ( <Shoes data={this.state.products[1]} addToCart={this.addToCart} {...props} /> )} />
-                </Switch>
-                <Cart data={this.state.cart} cartTotal={this.state.cartTotal} />
+                <div className='container'>
+                    <div className='col-s-8'>
+                    <Switch>
+                        {/* Pass additional props to each of these rendered components */}
+                        
+                            <Route path={match.url + '/hats'} render={(props) => ( <Hats data={this.state.products[0]} addToCart={this.addToCart} {...props} /> )} />
+                            <Route path={match.url + '/shoes'} render={ (props) => ( <Shoes data={this.state.products[1]} addToCart={this.addToCart} {...props} /> )} />
+                        
+                    </Switch>
+                    </div>
+                </div>
+                </div>
             </div>
         )
     }

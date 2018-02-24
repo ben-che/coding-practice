@@ -39,11 +39,29 @@ class App extends Component {
   }
 
   render() {
+    let navStyle = {
+      "width": "100vw",
+      "height": "5vh",
+      "backgroundColor": "#333",
+      "textAlign":"right",
+      "paddingTop":'1.5vh',
+      'paddingRight':'3vw',
+      'boxShadow':'0 2px 2px 2px #ccc',
+      'zIndex' : "2",
+      "position": 'fixed'
+    }
+    let navLink = {
+      'color':'white',
+      'marginRight':'2vw',
+      'display':'inline-block'
+    }
     return (
       <div className="App">
-        <nav>
-          <Link to='/'>Home</Link>
-          <Link to='/shop'>Shop</Link>
+        <nav style={navStyle}>
+        
+          <Link style={navLink} to='/'>Home</Link>
+          <Link style={navLink} to='/shop'>Shop</Link>
+          
         </nav>
         <Switch>
           <Route path='/' exact render={(props) => ( <Home storeUser={this.storeUser} {...props} /> )} />

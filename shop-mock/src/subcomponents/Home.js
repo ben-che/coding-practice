@@ -24,9 +24,16 @@ class Home extends Component {
         if (null !== localStorage.getItem('user')) {
             return ( <Redirect to='/shop' /> );
         }
+
+        // Styles
+        let landingContainer = {
+            'marginTop':'20vh',
+        }
         return (
             <div>
                 <h1>Home</h1>
+                <div style={landingContainer}>
+                <h2 class='text-muted'>enter your name here!</h2>
                 {/* pass user's input back to app, reset the input field to an empty string */}
                 <form onSubmit={(event) => {this.props.storeUser(event, this.state.val);
                                                                  this.setState({
@@ -35,6 +42,7 @@ class Home extends Component {
                     <input required type='text' placeholder='enter name' value={this.state.val} onChange={this.handleChange} />
                     <button type='submit'  >submit</button>
                 </form>
+                </div>
             </div>
         )
     }
