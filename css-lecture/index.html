@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel='stylesheet' href='styles.css'>
+
+    </head>
+  <body>
+        
+    <div class='h-100 w-100 section-container'>
+        <div class='container'>
+            <h1 class='text-center'>CSS Animation Basics</h1>
+
+            <p>CSS Animations are broken down into 8 different properties - this is all you need to actually animate something! Let's examine
+                each one of these properties and get familair with them:
+            </p>
+            <ul>
+                <li>Animation name: Used in conjunction with a @keyframes rule - more on this later.</li>
+                <li class='list-example text-muted'>Example: animation-name: slide-in-horizontally</li>
+                <!-- 1 -->
+                <li>Animation duration: How long the animation takes to complete after it begins</li>
+                <li class='list-example text-muted'>Example: animation-duration: 1s</li>
+                <div class='sample-square-1' id='sample-1'></div>
+                <!-- 2 -->
+                <li>Animation timing function: How the animation actually plays out</li>
+                <li class='list-example text-muted'>Example: animation-timing-function: linear</li>
+                <div class='sample-square-2-linear' id='sample-2-lin'></div>
+                <li class='list-example text-muted'>Example: animation-duration: ease</li>
+                <div class='sample-square-2-ease' id='sample-2-ease'></div>
+                <!-- 3 -->
+                <li>Animation delay: How long it takes for the animation to play after the element has loaded, and the animation start has been triggered</li>
+                <li class='list-example text-muted'>Example: animation-delay: 1s</li>
+                <div class='sample-square-3' id='sample-3'></div>
+                <!-- 4 -->
+                <li>Animation iteration count: How many time the animation plays - can take in a number or 'infinite'</li>
+                <li class='list-example text-muted'>Example: animation-iteration-count: 2</li>
+                <div class='sample-square-4-finite' id='sample-4-finite'></div>
+                <li class='list-example text-muted'>Example: animation-iteration-count: infinite</li>
+                <div class='sample-square-4-infinite' id='sample-4-infinite'></div>
+                <!-- 5 -->
+                <li>Animation direction: Specifies whether the animation plays normally or backwards</li>
+                <li class='list-example text-muted'>Example: animation-direction: normal</li>
+                <div class='sample-square-5-norm' id='sample-5-norm'></div>
+                <li class='list-example text-muted'>Example: animation-direction: reverse</li>
+                <div class='sample-square-5-reverse' id='sample-5-reverse'></div>
+                <!-- 6 -->
+                <li>Animation fillmode: Specifies how styles should be applied before and after execution - it's similar to direction except
+                    instead of direction, it's stylistic properties (think background-color)
+                </li>
+                <li class='list-example text-muted'>Example: animation-fillmode: forwards</li>
+                <!-- 7 -->
+                <li>Animation playstate: Specifies whether or not an animation is running or paused. That's it!
+                </li>
+                <li class='list-example text-muted'>Example: animation-fillmode: running</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class='h-100 w-100 section-container' style='background-color:#eee'>
+        <div class='container'>
+            <h1 class='text-center'>Keyframes</h1>
+            <p>Keyframes are a way to control your CSS animations to a very precise degree. You can specify what your animation should be at
+                a specific point in time - here's what the syntax looks like:
+            </p>
+            <div class='row'>
+                <div class="col-xs-4 col-md-4 col-lg-4">
+                    <div class='keyframe-example-container'>
+                    <p>animation: animKey 3s ease-in 1s infinite normal running;</p>
+                    <hr>
+                    <p>@keyframes animKey {<br>
+                        &nbsp0% {<br>
+                            &nbsp&nbspmargin-top:0;<br>
+                            &nbsp&nbspmargin-left:0;<br>
+                            &nbsp}<br>
+                            &nbsp20% {<br>
+                                &nbsp&nbsp  margin-top:0;<br>
+                                &nbsp&nbsp  margin-left:450px;<br>
+                                &nbsp&nbsp  margin-right:0;<br>
+                                &nbsp}<br>
+                                &nbsp40% {<br>
+                                    &nbsp&nbsp   margin-left:450px;<br>
+                                    &nbsp&nbsp   margin-top:450px;<br>
+                                    &nbsp&nbsp  margin-right:0<br>
+                                    &nbsp }<br>
+                                    &nbsp60% {<br>
+                                        &nbsp&nbsp    margin-right:450px;<br>
+                                        &nbsp&nbsp   margin-left:0;<br>
+                                        &nbsp&nbsp   margin-top:450px;<br>
+                                        &nbsp } <br>
+                                        &nbsp 80% { <br>
+                                            &nbsp&nbsp    margin-top:0;<br>
+                                            &nbsp&nbsp    margin-left: 0;<br>
+                                            &nbsp  }<br>
+                                            &nbsp 100% {<br>
+                                                &nbsp&nbsp     margin-top:0;<br>
+                                                &nbsp&nbsp      margin-left:0;<br>
+                                                &nbsp  }<br>
+                                                 }<br></p>
+                    </div>
+                </div>
+                <div class='col-xs-8 col-md-4 col-lg-4'>
+                    <div class='keyframe-example-container-2'>
+                        <div class='sample-square-6'></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class:'h-100 w-100' style='background-color: lightblue'>
+        <div class="cloud-animation-1">
+            <div class='cloud c1'></div>
+        </div>
+
+        <div class="cloud-animation-2">
+                <div class='cloud c2'></div>
+        </div>
+
+        <div class="cloud-animation-3">
+                <div class='cloud c3'></div>
+        </div>
+
+        <div class="cloud-animation-4">
+                <div class='cloud c4'></div>
+        </div>
+
+        <div class="cloud-animation-5">
+                <div class='cloud c5'></div>
+        </div>
+
+        <div class="cloud-animation-1">
+            <div class='cloud c1'></div>
+        </div>
+
+        <div class="cloud-animation-2">
+                <div class='cloud c2'></div>
+        </div>
+
+        <div class="cloud-animation-3">
+                <div class='cloud c3'></div>
+        </div>
+    </div>
+
+    <div class='h-100 w-100'>
+            <div id="hitarea">
+                    <div id="a-1" class="hitbox"></div>
+                    <div id="a-2" class="hitbox"></div>
+                    <div id="a-3" class="hitbox"></div>
+                    <div id="a-4" class="hitbox"></div>
+                    <div id="a-5" class="hitbox"></div>
+                    <div id="b-1" class="hitbox"></div>
+                    <div id="b-2" class="hitbox"></div>
+                    <div id="b-3" class="hitbox"></div>
+                    <div id="b-4" class="hitbox"></div>
+                    <div id="b-5" class="hitbox"></div>
+                    <div id="c-1" class="hitbox"></div>
+                    <div id="c-2" class="hitbox"></div>
+                    <div id="c-3" class="hitbox"></div>
+                    <div id="c-4" class="hitbox"></div>
+                    <div id="c-5" class="hitbox"></div>
+                    <div id="d-1" class="hitbox"></div>
+                    <div id="d-2" class="hitbox"></div>
+                    <div id="d-3" class="hitbox"></div>
+                    <div id="d-4" class="hitbox"></div>
+                    <div id="d-5" class="hitbox"></div>
+                    <div id="e-1" class="hitbox"></div>
+                    <div id="e-2" class="hitbox"></div>
+                    <div id="e-3" class="hitbox"></div>
+                    <div id="e-4" class="hitbox"></div>
+                    <div id="e-5" class="hitbox"></div>
+                    <div class="eye">
+                      <div class="pupil"></div>
+                    </div>
+                    <div class="eye">
+                      <div class="pupil"></div>
+                    </div>
+                    <div class="eyelid"></div>
+                    <div class="eyelid"></div>
+                </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    
+    <!-- JQuery onCLick function to facilitate demos -->
+    <script>
+        // 1
+        $("#sample-1").click(function() {
+            $('.sample-square-1').toggleClass('sample-square-1-active');
+          });
+
+        // 2
+        $("#sample-2-lin").click(function() {
+        $('.sample-square-2-linear').toggleClass('sample-square-2-linear-active');
+        });
+
+        $("#sample-2-ease").click(function() {
+        $('.sample-square-2-ease').toggleClass('sample-square-2-ease-active');
+        });
+
+        // 3
+        $("#sample-3").click(function() {
+        $('.sample-square-3').toggleClass('sample-square-3-active');
+        });
+
+        // 4
+        $("#sample-4-finite").click(function() {
+        $('.sample-square-4-finite').toggleClass('sample-square-4-finite-active');
+        });
+
+        $("#sample-4-infinite").click(function() {
+        $('.sample-square-4-infinite').toggleClass('sample-square-4-infinite-active');
+        });
+
+        // 5
+        $("#sample-5-norm").click(function() {
+        $('.sample-square-5-norm').toggleClass('sample-square-5-norm-active');
+        });
+
+        $("#sample-5-reverse").click(function() {
+        $('.sample-square-5-reverse').toggleClass('sample-square-5-reverse-active');
+        });
+
+        // 6
+
+    </script>
+</body>
+</html>

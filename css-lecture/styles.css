@@ -1,0 +1,607 @@
+.section-container {
+    padding:5vh 3vw
+}
+
+.list-example {
+    list-style: none;
+    margin-left:10px;
+    font-style: italic;
+}
+
+/* ex 1 */
+.sample-square-1 {
+    height:50px;
+    width:50px;
+    background-color:blue;
+    -webkit-transition:  1s linear;  
+    -moz-transition:  1s linear;  
+    -o-transition:  1s linear;  
+    -ms-transition:  1s linear;  
+    transition:  1s linear;
+}
+
+.sample-square-1-active {
+    margin-left:300px;
+}
+
+/* ex 2 */
+
+.sample-square-2-linear {
+    height:50px;
+    width:50px;
+    background-color:green;
+    -webkit-transition:  1s linear;  
+    -moz-transition:  1s linear;  
+    -o-transition:  1s linear;  
+    -ms-transition:  1s linear;  
+    transition:  1s linear;
+}
+
+.sample-square-2-linear-active {
+    margin-left:300px;
+}
+
+.sample-square-2-ease {
+    height:50px;
+    width:50px;
+    background-color:green;
+    -webkit-transition:  1s ease;  
+    -moz-transition:  1s ease;  
+    -o-transition:  1s ease;  
+    -ms-transition:  1s ease;  
+    transition:  1s ease;
+}
+
+.sample-square-2-ease-active {
+    margin-left:300px;
+}
+
+/* ex 3 */
+
+.sample-square-3 {
+    height:50px;
+    width:50px;
+    background-color:red;
+    -webkit-transition:  1s linear 2s;  
+    -moz-transition:  1s linear 2s;  
+    -o-transition:  1s linear 2s;  
+    -ms-transition:  1s linear 2s;  
+    transition:  1s linear 2s;
+}
+
+.sample-square-3-active {
+    margin-left:300px;
+
+}
+
+/* ex 4 */
+
+.sample-square-4-finite {
+    height:50px;
+    width:50px;
+    background-color:orange;
+    animation: 3s linear 0s 2  paused anim1;
+}
+
+.sample-square-4-finite-active {
+    margin-left:300px;
+    animation: 3s linear 0s 2 anim1;
+}
+
+@keyframes anim1 {
+    0% {
+        margin-left:0;
+    }
+    100% {
+        margin-left:300px;
+    }
+  }
+
+.sample-square-4-infinite {
+    height:50px;
+    width:50px;
+    background-color:orange;
+    animation: 3s linear 0s 2 paused anim2;
+}
+
+.sample-square-4-infinite-active {
+    margin-left:300px;
+    animation: 3s linear 0s infinite anim2;
+}
+
+@keyframes anim2 {
+    0% {
+        margin-left:0;
+    }
+    100% {
+        margin-left:300px;
+    }
+  }
+
+/* ex 5 */
+
+.sample-square-5-norm {
+    height:50px;
+    width:50px;
+    background-color:purple;
+    animation: 3s linear 0s 2 normal paused anim3;
+}
+
+.sample-square-5-norm-active {
+    margin-left:300px;
+    animation: 3s linear 0s normal anim3;
+}
+
+@keyframes anim3 {
+    0% {
+        margin-left:0;
+    }
+    100% {
+        margin-left:300px;
+    }
+  }
+
+.sample-square-5-reverse {
+    height:50px;
+    width:50px;
+    background-color:purple;
+    animation: 3s linear 0s 2 reverse paused anim4;
+}
+
+.sample-square-5-reverse-active {
+    margin-left:300px;
+    animation: 3s linear 0s reverse anim4;
+}
+
+@keyframes anim4 {
+    0% {
+        margin-left:0;
+    }
+    100% {
+        margin-left:300px;
+    }
+}
+
+/* Keyframe Examples */
+
+.keyframe-example-container {
+    padding:20px;
+    border:1px solid #ccc;
+    background-color:white;
+}
+
+.keyframe-example-container-2 {
+    padding:20px;
+    border:1px solid #ccc;
+    background-color:white;
+    min-width:550px;
+    min-height:550px;
+
+}
+
+.sample-square-6 {
+    height:50px;
+    width:50px;
+    background-color:yellowgreen;
+    animation: animKey 3s ease-in 1s infinite normal running;
+}
+
+@keyframes animKey {
+    0% {
+        margin-top:0;
+        margin-left:0;
+    }
+    20% {
+        margin-top:0;
+        margin-left:450px;
+        margin-right:0;
+    }
+    40% {
+        margin-left:450px;
+        margin-top:450px;
+        margin-right:0
+    }
+    60% {
+        margin-right:450px;
+        margin-left:0;
+        margin-top:450px;
+    }
+    80% {
+        margin-top:0;
+        margin-left: 0;
+    }
+    100% {
+        margin-top:0;
+        margin-left:0;
+    }
+  }
+
+@-webkit-keyframes animKey {
+    0% {
+        margin-top:0;
+        margin-left:0;
+    }
+    20% {
+        margin-top:0;
+        margin-left:450px;
+        margin-right:0;
+    }
+    40% {
+        margin-left:450px;
+        margin-top:450px;
+        margin-right:0
+    }
+    60% {
+        margin-right:450px;
+        margin-left:0;
+        margin-top:450px;
+    }
+    80% {
+        margin-top:0;
+        margin-left: 0;
+    }
+    100% {
+        margin-top:0;
+        margin-left:0;
+    }
+}
+
+/* Clouds */
+
+.cloud {
+    /* Drawing the cloud: */
+    background: #fff;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
+	
+	-webkit-box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+
+	height: 130px;
+	position: relative;
+    width: 350px;
+
+    z-index: 1;
+
+}
+
+.cloud:after, .cloud:before {
+    /* The before and after pseduoclasses are often used to add additional styling to HTML elements - try:
+
+    p:before {content: 'before pseudoclass text'};
+    p:after {content: 'after pseudoclass text'};
+    
+    to better understand how pseudoclasses work */
+
+    /* Ensures the that the before and after pseudoclasses stay behind our main cloud object */
+
+    background: #fff;
+	content: '';
+	position: absolute;
+	z-index: -1;
+}
+
+.cloud:before {
+    /* Big puffy */
+    -webkit-border-radius: 200px;
+	-moz-border-radius: 200px;
+	border-radius: 200px;
+
+	width: 180px;
+	height: 190px;
+	right: 50px;
+	top: -90px;
+}
+
+.cloud:after {
+    /* Smol puffy */
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
+
+	height: 180px;
+	left: 50px;
+	top: -50px;
+	width: 100px;
+}
+
+/* Make different clouds */
+.c1 {
+    transform:scale(0.5);
+    margin-top:20px;
+}
+
+.c2 {
+    transform:scale(0.55);
+    margin-top:4px;
+}
+
+.c3 {
+    transform:scale(0.6);
+    margin-top:5px;
+}
+.c4 {
+    transform:scale(0.45);
+    margin-top:3px;
+}
+.c5 {
+    transform:scale(0.55);
+    margin-top:2px;
+}
+
+
+/* Cloud Animations */
+.cloud-animation-1 {
+    -webkit-animation: cloud-slide-reverse 20s linear infinite;
+	-moz-animation: cloud-slide-reverse 20s linear infinite ;
+    animation: cloud-slide-reverse 20s linear infinite;
+}
+
+.cloud-animation-2 {
+    -webkit-animation: cloud-slide 17s linear infinite;
+	-moz-animation: cloud-slide 17s linear infinite ;
+    animation: cloud-slide 17s linear infinite;
+}
+
+.cloud-animation-3 {
+    -webkit-animation: cloud-slide-reverse 27s linear infinite;
+	-moz-animation: cloud-slide-reverse 27s linear infinite ;
+    animation: cloud-slide-reverse 27s linear infinite;
+}
+
+.cloud-animation-4 {
+    -webkit-animation: cloud-slide 19s linear infinite;
+	-moz-animation: cloud-slide 19s linear infinite ;
+    animation: cloud-slide 19s linear infinite;
+}
+.cloud-animation-5 {
+    -webkit-animation: cloud-slide 30s linear infinite;
+	-moz-animation: cloud-slide 30s linear infinite ;
+    animation: cloud-slide 30s linear infinite;
+}
+
+@keyframes cloud-slide {
+    0% {
+        /* Hide the cloud - this means the cloud will behind -100% of the screen at the beginning of the animation */
+      margin-left: -10%;
+    }
+    100% {
+        /* Center the cloud - at the end of the animation, the cloud will end up in the middle, as defined in the class */
+     margin-left: 100%;
+    }
+}
+
+@keyframes cloud-slide-reverse {
+    0% {
+        /* Hide the cloud - this means the cloud will behind -100% of the screen at the beginning of the animation */
+      margin-left: 90%;
+    }
+    100% {
+        /* Center the cloud - at the end of the animation, the cloud will end up in the middle, as defined in the class */
+     margin-left: -10%;
+    }
+}
+
+/* Eyes */
+body{background:#000;margin:0;}
+#hitarea{
+  position:absolute; 
+  left:50%;
+  margin-left:-250px;
+  width:500px;
+  height:500px;
+}
+
+.hitbox{
+    width:100px;
+    height:100px;
+    float:left;    
+}
+
+/* eyes */
+.eye{
+  position:absolute;
+  width:100px;
+  height:100px;
+  background: #fff;
+  border-radius:50px;
+  left:25%;
+  top: 40%;  
+  pointer-events: none;    
+}
+
+.eye+.eye{
+    left: 55%; 
+}
+
+.pupil{
+  position:relative;
+  width:25px;
+  height:25px;
+  background:#000;
+  border-radius:12px;
+  left:50%;
+  top:50%;
+  margin:-12px 0 0 -12px;
+  -webkit-transition: all .5s ease;
+}
+
+.eyelid{
+    width:150px;
+    height: 100px;
+    position:absolute;
+    left:20%;
+    top: 25%;  
+    pointer-events: none;
+    background: #000;
+    -webkit-animation-name:             blink; 
+    -webkit-animation-duration:         4.5s; 
+    -webkit-animation-iteration-count:  infinite;
+    -webkit-animation-timing-function:  linear;
+    -webkit-animation-direction:        alternate;
+    -webkit-animation-delay: 1s; 
+    -webkit-transition: all .5s ease;
+    
+}
+
+.eyelid+.eyelid{
+    left: 50%; 
+}
+
+/* Blinking eyes */
+@-webkit-keyframes blink{
+  0%{
+    top:25%;
+  }
+ 95%{
+    top:25%;
+  }
+  100%{ 
+    top:40%;
+  }
+}
+
+/* hover events */
+
+/* eye lids */
+.hitbox:hover ~ .eyelid{
+    -webkit-transform: rotate(-10deg);
+}
+.hitbox:hover ~ .eyelid:nth-of-type(2n+1){
+    -webkit-transform: rotate(10deg);
+}
+#c-3:hover ~ .eyelid{
+    -webkit-transform: rotate(15deg);
+}
+#c-3:hover ~ .eyelid:nth-of-type(2n+1) {
+    -webkit-transform: rotate(-15deg);
+}
+
+/* pupils */
+
+#a-1:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(60deg) translate(-30px);
+}
+
+#a-2:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(80deg) translate(-30px);
+}
+
+#a-3:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(90deg) translate(-30px);
+}
+
+#a-4:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(100deg) translate(-30px);
+}
+
+#a-5:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(120deg) translate(-30px);
+}
+
+#b-1:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(50deg) translate(-25px);
+}
+
+#b-2:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(70deg) translate(-25px);
+}
+
+#b-3:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(100deg) translate(-25px);
+}
+
+#b-3:hover ~ .eye:nth-of-type(2n+1) > .pupil {
+    -webkit-transform: rotate(80deg) translate(-25px);
+}
+
+#b-4:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(110deg) translate(-25px);
+}
+
+#b-5:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(130deg) translate(-25px);
+}
+
+#c-1:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(0deg) translate(-25px);
+}
+
+#c-2:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(0deg) translate(-10px);
+}
+
+#c-3:hover ~ .eye > .pupil{
+    background: red;
+    -webkit-transform: rotate(180deg) translate(-25px);
+}
+
+#c-3:hover ~ .eye:nth-of-type(2n+1) > .pupil {
+    -webkit-transform: rotate(0deg) translate(-25px);
+}
+
+#c-4:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(180deg) translate(-10px);
+}
+
+#c-5:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(180deg) translate(-25px);
+}
+
+#d-1:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(-40deg) translate(-25px);
+}
+
+#d-2:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(-60deg) translate(-25px);
+}
+
+#d-3:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(-120deg) translate(-25px);
+}
+
+#d-3:hover ~ .eye:nth-of-type(2n+1) > .pupil {
+    -webkit-transform: rotate(-60deg) translate(-25px);
+}
+
+#d-4:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(-130deg) translate(-25px);
+}
+
+#d-4:hover ~ .eye:nth-of-type(2n+1) > .pupil{
+    -webkit-transform: rotate(-100deg) translate(-25px);
+}
+
+#d-5:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(-140deg) translate(-25px);
+}
+
+#e-1:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(-40deg) translate(-30px);
+}
+
+#e-2:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(-60deg) translate(-30px);
+}
+
+#e-3:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(-120deg) translate(-30px);
+}
+
+#e-3:hover ~ .eye:nth-of-type(2n+1) > .pupil {
+    -webkit-transform: rotate(-60deg) translate(-30px);
+}
+
+#e-4:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(-130deg) translate(-30px);
+}
+
+#e-4:hover ~ .eye:nth-of-type(2n+1) > .pupil{
+    -webkit-transform: rotate(-100deg) translate(-30px);
+}
+
+#e-5:hover ~ .eye > .pupil{
+    -webkit-transform: rotate(-140deg) translate(-30px);
+}
