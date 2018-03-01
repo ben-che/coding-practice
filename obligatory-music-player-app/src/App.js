@@ -1,37 +1,36 @@
 import React, { Component } from 'react';
-import {Route, Link, Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import SongsList from './components/SongsList';
 import SongDetails from './components/SongDetails';
 import AudioPlayer from './components/AudioPlayer';
+import axios from 'axios';
+import { setInterval } from 'timers';
 
+// initialize variables so JS will let us refer to them before we actually need them
+let selectedSong, progressBarForeground;
+
+// helper function that takes in a number, and converts it into minutes and seconds
+let secToMin = (n) => {
+  let seconds = n % 60;
+  if (seconds < 10) {
+    seconds = "0" + seconds;
+  }
+  let minutes = Math.floor(n / 60);
+  return (minutes + ":" + seconds);
+}
 class App extends Component {
 
   // state constructor:
   constructor() {
     super();
     this.state = {
-      song: [
-        {
-          name: 'test song',
-          img: 'placeholder img',
-          source: '/music/olympian.mp3',
-          id:0
-        },
-        {
-          name: 'test song2',
-          img: 'placeholder img2',
-          source: '/music/upstep.mp3',
-          id:1
-        },
-        {
-          name: 'test song3',
-          img: 'placeholder img3',
-          source: '/music/transmission.mp3',
-          id:2
-        },
-      ],
+      song:[{}],
+      // a state to keep track of what the current song id is 
       currentSong : 0,
-
+      // a state to keep track of the current typestamp of the song
+      currentProgress : 0,
+      // a state to keep track of the song's progress bar
+      percentComplete : 0,
       // a state to keep track of whether media is playing or not
       playing: false
     }
@@ -40,7 +39,7 @@ class App extends Component {
   // methods
 
   /* ===================================================== */
-  /* methods for audio player various controls start here */
+  /* methods for audio player controls start here */
 
   // playToggle() method changes the state of playing to its boolean opposite, and allows
   //  a re-rendering of the component, triggering the componentDidUpdate function, and
@@ -82,6 +81,7 @@ class App extends Component {
           currentSong : lastTrack
         })
       }
+
       else {
         console.log('playing previous track');
         this.setState({
@@ -89,6 +89,23 @@ class App extends Component {
         })
       }
     }
+  }
+  
+  // primarily responsible for updating the state of the song progress bar as well as its duration
+  //    in single second increments
+  timeElapsed = () => {
+    setInterval(() => {
+      // console.log(selectedSong);
+      // update the current states every 1000 milliseconds so the time and progress bar reflect the song
+      //    completion state
+      this.setState({
+        currentProgress : secToMin(Math.ceil(selectedSong.currentTime)),
+        percentComplete: selectedSong.currentTime / selectedSong.duration * 100
+      })
+      progressBarForeground.style.width = this.state.percentComplete + '%'
+      console.log(this.state.percentComplete);
+      console.log(progressBarForeground.style.width)
+    }, 1000)
   }
 
   // ================ //
@@ -161,37 +178,118 @@ class App extends Component {
     }
   }
 
+  // use axios to get list of songs from 'database'
+  componentDidMount() {
+    axios.get('http://localhost:8080/songdatabase').then((songs) => {
+      console.log(songs.data);
+      this.setState({
+        song:songs.data
+      })
+    }).catch((error) => {
+      console.log(error);
+    })
+    // store the audio item in variable after component mounts - cannot do it before because
+    //    there will be no element to reference
+
+    // these variables will be used in methods built for the AudioPlayer Component
+    selectedSong = document.getElementById('audio-player');
+    progressBarForeground = document.getElementById('progressBarForeground');
+
+    // calls the timeElapsed function every time the component updates (so we can update every second)
+    this.timeElapsed();
+  }
+
   /* component life cycle methods end here
   /* ===================================================== */
 
   render() {
-    return (
-      <div className="App">
-        <nav>
-          <Link to='/'>home component</Link>
-          <Link to='/songID'>songid</Link>
-        </nav>
-        <h1>home component</h1>
-        <Switch>
-          <Route exact path="/" render={()=><SongsList playing={this.state.playing} 
-                                                       currentSong={this.state.currentSong} 
-                                                       songs={this.state.song} 
-                                                       playSong={this.playSong} />}
-                                                       />
-          <Route exact path="/:songID" render={(props)=><SongDetails songs={this.state.song} 
-                                                                     match={props.match} 
-                                                                     playing={this.state.playing} 
-                                                                     currentSong={this.state.currentSong} 
-                                                                     playSong={this.playSong} />} 
-                                                                     />
-        </Switch>
+    // Top level styles
+    let appWrapper = {
+      'padding':'0 15vw',
+      'backgroundColor':'#ddd'
+    }
+    let headerContainer = {
+      'height':'20vh',
+      'width':'100%',
+      'backgroundColor' : '#333',
+      'verticalAlign':'bottom',
+      'backgroundImage':'url(img/bg.jpeg)',
+      'backgroundPosition':'center',
+      'backgroundSize':'cover',
+      'backgroundRepeat':'no-repeat',
+      'paddingRight':'15px',
+      'paddingTop':'17vh',
+      'textAlign':'right'
+    }
 
-        <AudioPlayer changeSong={this.changeSong}
-                     playing={this.state.playing} 
-                     play={this.playToggle} 
-                     song={this.state.song[this.state.currentSong]} 
-                     currentSong={this.state.currentSong}
-                     />
+    let headerText = {
+      'fontSize':'30px',
+      'color':'#fff',
+      'fontFamily':'Verdana, Geneva, sans-serif'
+    }
+
+    let detailsContainer = {
+      'height':'75vh',
+      'backgroundColor':'#fff'
+    }
+
+    let detailsHeader = {
+      'paddingLeft': '57px',
+      'paddingTop':'13px',
+      'textAlign':'left',
+      'backgroundColor':'#fff',
+    }
+
+    let audioWrapper = {
+      'height': '80px',
+      'backgroundColor':'#333',
+      'bottom':'0',
+      'position':'fixed',
+      'width':'100%'
+    }
+
+    return (
+      <div>
+        <div className='h-100 w-100' style={appWrapper}>
+
+          <div style={headerContainer}>
+            <h1 style={headerText}>issa vibe</h1>
+          </div>
+
+          <div style={detailsContainer}>
+            <div style={detailsHeader}>
+              <p className='text-muted'> tracks</p>
+            </div>
+            
+            <div className='container'>
+          
+              <Switch>
+                <Route exact path="/" render={()=><SongsList playing={this.state.playing} 
+                                                            currentSong={this.state.currentSong}
+                                                            songs={this.state.song} 
+                                                            playSong={this.playSong} />}
+                                                            />
+                <Route exact path="/:songID" render={(props)=><SongDetails songs={this.state.song} 
+                                                                          match={props.match} 
+                                                                          playing={this.state.playing} 
+                                                                          currentSong={this.state.currentSong} 
+                                                                          playSong={this.playSong} />} 
+                                                                          />
+              </Switch>
+            
+            </div>
+
+          </div>
+        </div>
+          <div style={audioWrapper}>
+            <AudioPlayer changeSong={this.changeSong}
+                          playing={this.state.playing} 
+                          play={this.playToggle} 
+                          currentProgress={this.state.currentProgress} 
+                          song={this.state.song[this.state.currentSong]} 
+                          currentSong={this.state.currentSong}
+                          />
+          </div>
       </div>
     );
   }
