@@ -10,15 +10,31 @@ class SongsList extends Component {
         let songListContainer = {
             'margin':'0px 20px',
             'padding':'15px',
-            'borderTop':'1px solid #ddd'
+            'color':'#fff',
+            'background':'transparent'
         }
 
         let oneSong = {
-            'boxShadow':'2px 2px 2px 2px #ddd',
             'backgroundColor':'#fff',
             'margin':'5px 0px',
-            'padding':'2px'
+            'padding':'2px',
+            'background':'transparent'
         }
+
+        let oneSongImg = {
+            'borderRadius':'50%'
+        }
+
+        //tried to make CD stylings lol
+        // let oneSongImgHole = {
+        //     'height': "20%",
+        //     'width':'24%',
+        //     'borderRadius':'50%',
+        //     'position':'absolute',
+        //     'backgroundColor':'#fff',
+        //     'marginLeft':'37%',
+        //     'marginTop':'35%'
+        // }
 
         let oneSongText = {
             'padding':'3px 3px',
@@ -33,7 +49,7 @@ class SongsList extends Component {
             return <div className='col-xs-12 col-s-12 col-m-6 col-lg-3 col-xl-3' style={oneSong}>
                         <Link to={'/'+ element.id}>
                             <div id={element.id} key={element.id}>
-                                <img src={element.img} className='img-fluid' alt='img here'/>
+                                <img src={element.img} className='img-fluid' style={oneSongImg} alt='img here'/>
                             </div>
                         </Link>
                         <p style={oneSongText}>{element.name} - {element.artist}</p>

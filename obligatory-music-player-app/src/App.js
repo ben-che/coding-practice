@@ -204,9 +204,24 @@ class App extends Component {
 
   render() {
     // Top level styles
+    let backgroundBlur = {
+      'height':'100%',
+      'width':'100%',
+      'position':'absolute',
+      'background':`url(${this.state.song[this.state.currentSong].img})`,
+      'backgroundSize':'cover',
+      'backgroundRepeat':'no-repeat',
+      'backgroundAttachment':'fixed',
+      "opacity": "0.6",
+      "webkitFilter": "blur(10px)",
+      "zIndex":'-1',
+      'top':'0',
+      'left':'0',
+      'right':'0',
+      'bottom':'0'
+    }
     let appWrapper = {
       'padding':'0 15vw',
-      'backgroundColor':'#ddd'
     }
     let headerContainer = {
       'height':'20vh',
@@ -229,15 +244,15 @@ class App extends Component {
     }
 
     let detailsContainer = {
-      'height':'75vh',
-      'backgroundColor':'#fff'
+      'height':'45vh',
+      'background':'rgba(0,0,0,0.4)'
     }
 
-    let detailsHeader = {
-      'paddingLeft': '57px',
-      'paddingTop':'13px',
-      'textAlign':'left',
-      'backgroundColor':'#fff',
+    let d3Wrapper = {
+      'width':'100%',
+      'height':'30vh',
+      'overflow':'hidden',
+      'background':'rgba(0,0,0,0.5)'
     }
 
     let audioWrapper = {
@@ -252,15 +267,11 @@ class App extends Component {
       <div>
         <div className='h-100 w-100' style={appWrapper}>
 
-          <div style={headerContainer}>
+          <div id='header' style={headerContainer}>
             <h1 style={headerText}>issa vibe</h1>
           </div>
 
-          <div style={detailsContainer}>
-            <div style={detailsHeader}>
-              <p className='text-muted'> tracks</p>
-            </div>
-            
+          <div style={detailsContainer}>          
             <div className='container'>
           
               <Switch>
@@ -276,10 +287,9 @@ class App extends Component {
                                                                           playSong={this.playSong} />} 
                                                                           />
               </Switch>
-            
             </div>
-
           </div>
+          <div style={d3Wrapper} id='d3Wrapper'></div>
         </div>
           <div style={audioWrapper}>
             <AudioPlayer changeSong={this.changeSong}
@@ -290,6 +300,7 @@ class App extends Component {
                           currentSong={this.state.currentSong}
                           />
           </div>
+          <div style={backgroundBlur}></div>   
       </div>
     );
   }

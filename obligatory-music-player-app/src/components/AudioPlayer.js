@@ -13,10 +13,6 @@ class AudioPlayer extends Component {
         }
     }
 
-    calculateElapsed = () => {
-        let songObject = document.getElementById('audio-player');
-        console.log(songObject.currentTime);
-      }
 
     render() {
         
@@ -65,6 +61,7 @@ class AudioPlayer extends Component {
 
         console.log(this.props)
         return (
+
             <div style={audioContainer}>
             
             <audio id='audio-player' src={this.props.song.source}  />
