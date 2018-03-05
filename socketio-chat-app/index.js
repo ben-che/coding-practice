@@ -28,6 +28,14 @@ io.sockets.on('connection', (socket) => {
     console.log('a user has connected');
     console.log('there are %s users connected', connections.length);
 
+    // the whole purpose of the chatapp is so that users can message each other. to do this,
+    //      we can use the socket.on('send message') method to allow the server to send messages
+    //      to the general users
+    socket.on('send message', (data) => {
+        io.sockets.emit('new message', {msg:data});
+        console.log('server recieved a message from user: ' + data);
+
+    });
 
     // we can use socket.on('disconnect') to specify actions to take when a user disconnects
     //      what we want to do is to splice the disconnected user from the array

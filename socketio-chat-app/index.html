@@ -42,7 +42,29 @@
     <script>
         // this jQuery function allows socket.io to recognize whenever someone connects to the chatroom
         $( (data)=> { 
+            // this catches a user when they first connect
             let socket = io.connect();
+
+            // this catches user's message:
+            // first, use jQuery to capture the value in the message form:
+            let $messageForm = $('#messageForm');
+            let $message = $('#message');
+            let $chat = $('#chat');
+            // on message form submit:
+            $messageForm.submit((event)=>{
+                // stop the page from refreshing
+                event.preventDefault();
+                
+                console.log('a user submitted a message');
+                // socket.emit('send message', message_value) will capture the message in the textarea field and
+                //      send it to the server
+                socket.emit('send message', $message.val());
+                // reset textarea field after message is sent to server
+                $message.val('');
+
+                
+
+            })
         })
     </script>
     </body>
