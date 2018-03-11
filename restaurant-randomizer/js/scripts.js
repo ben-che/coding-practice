@@ -33,14 +33,14 @@ let radius ="5000";
 
 // main function to make api requests to yelp
 function userQuery(location, category, radius) {
-    request.get('https://api.yelp.com/v3/businesses/search?location=' + location.address + "," +location.city +","+location.province+','+location.country+'&categories='+category +'&radius=' + radius, {
+    request('https://api.yelp.com/v3/businesses/search?location=' + location +'&categories='+category +'&radius=' + radius, {
         headers : {
             'Authorization': 'Bearer '+ keys.data.yelpAPI
         }
     },  (error, res, body) => {
         
         let queryData = JSON.parse(body);
-        console.log('the yelp api returns: '+ JSON.stringify(queryData));
+        // console.log('the yelp api returns: '+ JSON.stringify(queryData));
         let queryDataLength = queryData.businesses.length;
         // no results:
         if (queryDataLength < 1) {
@@ -65,10 +65,11 @@ function userQuery(location, category, radius) {
             let price = randomRestuarantData.price;
             let address = randomRestuarantData.location.address1;
             let yelpUrl = randomRestuarantData.url;
-            console.log(yelpUrl);
-            return yelpUrl;
+            // console.log(yelpUrl);
+            // return yelpUrl;
             // debugging - ensure that all selectors work
             console.log('name: ' + name + ' image: ' + image + ' rating: ' +rating+ ' price: ' +price + ' address: ' + address + 'yelp url: ' + yelpUrl);
+            return 'name: ' + name + ' image: ' + image + ' rating: ' +rating+ ' price: ' +price + ' address: ' + address + 'yelp url: ' + yelpUrl;
         }
     })
 }
@@ -85,27 +86,32 @@ function restaurantRandomizer(queryData, queryDataLength) {
 
 app.get('/result', (req, res) => {
     
-    let inputLocation = {
-        // address: req.query.address,
-        city: req.query.city,
-        // province: req.query.province,
-        // country: req.query.country
-    }
+    // let inputLocation = {
+    //     // address: req.query.address,
+    //     city: req.query.city,
+    //     // province: req.query.province,
+    //     // country: req.query.country
+    // }
+
+    let inputLocation = req.query.location;
     let inputCategory = req.query.category;
     // max radius is 40000 meters
     let inputRadius = req.query.radius;
 
-    console.log(req.query);
-    console.log(req.query.city);
-    console.log(req.query.radius)
-    let yelpUrl = String(userQuery(inputLocation, inputCategory, inputRadius));
+    // console.log(req.query.location);
+    // console.log(req.query.city);
+    // console.log(req.query.radius)
+
+    // let yelpUrl = String(userQuery(inputLocation, inputCategory, inputRadius));
     
+    // console.log(userQuery(inputçLocation, inputCategory, inputRadius));
     // redirect to random restaurant yelp page
-    res.redirect(yelpUrl);
-    
+    // res.redirect(yelpUrl);
+    res.send(userQuery(inputLocation, inputCategory, inputRadius));
 })
 
 // // server's listening.
 app.listen('8080', ()=> {
     console.log('listening to port 8080');
 })
+

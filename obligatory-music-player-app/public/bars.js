@@ -10,7 +10,7 @@ $(document).ready(function () {
     //      the element in the DOM (as we did above)
     let audioSrc = audioCtx.createMediaElementSource(audioElement);
     // createAnalyser is a method AudioContext inherits, the analyser allows exposure of time/frequency data
-    //      from the 
+    //      from the source media file
     let analyser = audioCtx.createAnalyser();
   
     // connect the audio sourcefile to analyser node
