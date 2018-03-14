@@ -1,0 +1,61 @@
+/* styles for map canvas */
+.mapTile {
+    background-color: #228B22;
+	position: absolute; 
+	top: 0px; left: 0px;
+	width: 15px; height: 15px;
+}
+
+/* styles for game ui */
+.gen-button-ui {
+    width: 100px; height: 50px;
+	color: #FFFFFF;
+	text-align: center;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+}
+
+.start-button {
+    background-color: #4682B4;
+	position: absolute; 
+	top: 495px; left: 20px;
+}
+ 
+.status-bar {
+    background-color:#333;
+    position: absolute;
+    top: 600px;
+    color:white;
+}
+/* turret styles */
+.gen-turret-ui {
+    background-color: #C0C0C0;
+    opacity: 0.7;
+    border: 2px solid #000000;
+    position: absolute;
+    top: 500px; left: 0px;
+    width: 40px; height: 40px;
+    color: #000000;
+    text-align: center;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+}
+
+.gen-turret {
+    height:10px;
+    width:10px;
+    background-color:black;
+    border-radius:50%;
+}
+
+.turret-spawn {
+    position: absolute;
+    top: 700px;
+    padding: 10px;
+    width:30px;
+    height:30px;
+    border-radius: 50%;
+    background-size: 10px 10px;
+    background-color: yellow;
+    background-image: linear-gradient(45deg,grey 25%,transparent 25%,transparent 50%,grey 50%,grey 75%,transparent 75%,transparent);
+}
