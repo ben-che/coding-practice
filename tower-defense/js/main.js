@@ -29,11 +29,11 @@ const turretSpawnTopOffset = 5;
 
 // playerCash is how much in game currency the player has - will be changed
 //  as game progresses
-let playerCash = 100;
+let playerCash = 1000;
 
 // drawMap() takes in no arguments and returns no values, but will create a grid system for the rest of the 
 //  code to operate on, the UI and attach any methods the UI will have 
-drawMap = () => {
+const drawMap = () => {
     // this loop controls the number of rows the grid system will have
     for (let i = 0; i < gameHeight; i++ ) {
         let maptile;
@@ -94,7 +94,7 @@ drawMap = () => {
         //  a helper function that determines the string output for each turret
         turret.innerHTML = "<p>" + turretInfo(turret.id).name + "<br><br>$" + turretInfo(turret.id).price + "</p>";
         // when user clicks on 'this' element, the turretSelect function will fire
-        turret.addEventListener('click', () => {turretBuy(turret.id)});
+        turret.addEventListener('click', () => {turretBuy(turret.id)}, false);
         // append the turret element created in the loop to the dom
         document.body.appendChild(turret);
 
@@ -116,7 +116,7 @@ drawMap = () => {
 	let statusBar = document.createElement("div");
 	statusBar.setAttribute("id","status-bar");
 	statusBar.setAttribute("class","status-bar");
-	statusBar.innerHTML = '<p> Cash: <span id="cash">$0</span> Score: <span id="score">0</span> Wave: <span id="wave">0</span> Lives: <span id="lives">0</span></p>';
+	statusBar.innerHTML = '<p> Cash: <span id="cash">$'+playerCash+ '</span> Score: <span id="score">0</span> Wave: <span id="wave">0</span> Lives: <span id="lives">0</span></p>';
     document.body.appendChild(statusBar);
     // console logs:
     // console.log('status bar created');
@@ -139,18 +139,17 @@ drawMap = () => {
 //  enemies to walk on or not
 // visually, if true is returned, the tile will be turned into a path tile, if not
 //  then the tile will be a grass tile for turret placement
-function levelZero(x,y)
-{   // defining the coordinates for enemy pathing
+const levelZero = (x,y) => {   
+    // defining the coordinates for enemy pathing
     if(	(x === 0 && (y >= 0 && y <= 1)) ||
         (x >=1 && x <= 75) && (y === 1) ||
         (x === 75 && (y >= 1 && y <= 5)) ||
         (x <= 75 && x >= 1) && (y===5) ||
         (x===1 && y>=5)
-		)
-	{
-		return true;
-	}
-	return false;
+		) {
+            return true;
+        }
+        return false;
 }
  
 // Turret Functions //
@@ -158,7 +157,7 @@ function levelZero(x,y)
 // function to determine individual turret ui stylings - used in the initial drawing of the map
 // turretInfo takes in a num (a unique turret id, in context), and returns an object with 
 //  key value pairs that hold each turret's information
-turretInfo = (id) => {
+const turretInfo = (id) => {
     switch(id) {
         case 'turret-0':
             return {
@@ -175,12 +174,14 @@ turretInfo = (id) => {
     }
 }
 
+
+
 // turretBuy takes in a turret ID, and if the player has enough in game currency, a
 //  turret will be created 
-turretBuy = (id) => {
+const turretBuy = (id) => {
     // console log to determine the click handler is working and the correct
     //  element is being handled
-    // console.log('turret id: ', id, ' was clicked');
+    console.log('turret id: ', id, ' was clicked');
 
     // grab the correct instance of the turret and set a context:
     let context = document.getElementById(id);
@@ -206,7 +207,10 @@ turretBuy = (id) => {
     let spawnTurret = document.createElement('div');
     spawnTurret.setAttribute('id', turretCounter);
     turretCounter++;
-
+    spawnTurret.setAttribute('class', 'gen-turret');
+    spawnTurret.setAttribute("class","turret-drag");
+    spawnTurret.setAttribute("draggable","true");
+    spawnTurret.addEventListener('dragstart', turretDrag(spawnTurret));
     document.getElementById('turret-spawn').appendChild(spawnTurret);
 
 }
