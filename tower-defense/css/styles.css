@@ -46,6 +46,23 @@
     width:10px;
     background-color:black;
     border-radius:50%;
+    top:710px;
+    left:10px;
+    position:absolute;
+}
+
+.grabbable {
+    cursor: grab;
+    cursor: move;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+ /* closed-hand cursor during drag operation. */
+.grabbable:active { 
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
 }
 
 .turret-spawn {

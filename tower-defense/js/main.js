@@ -1,3 +1,5 @@
+// requiring packages:
+
 // Map creation //
 
 // defining the width and length of the game screen - we need these as fixed values for the
@@ -63,10 +65,12 @@ const drawMap = () => {
             else {
                 // this listens for when the mouse enters the tile
                 // maptile.addEventListener('dragenter', dragEnter);
-                // this listens for when the mouse is dragging something over this specific tile
-                // mapTile.addEventListener('dragover',dragOver);
-                // this listens for the release of the mouse button above this specific tile
-                // mapTile.addEventListener('drop', dropTurret(mapTile));
+                // this listens for when the mouse is dragging something over the tile and ensures
+                //  that the drop behaviour works
+                mapTile.addEventListener('dragover', duringDrag);
+                // this listens for the release of the mouse button above this specific tile and
+                //  has logic to ensure that the placement is valid
+                mapTile.addEventListener('drop', () => { dropTurret(mapTile)} );
             }
             // here, we append the tile we just created to the dom along with its event
             //  listeners, if any, and reset the variable for reuse
@@ -185,8 +189,6 @@ const turretBuy = (id) => {
 
     // grab the correct instance of the turret and set a context:
     let context = document.getElementById(id);
-    // grab mouse event and assign it to mouseContext
-    let mouseContext = window.event;
 
     // checking if context is correct:
     // console.log(context);
@@ -201,16 +203,42 @@ const turretBuy = (id) => {
     // console log to check control flow:
     // console.log('enough cash');
 
-    let x = mouseContext.pageX,
-        y = mouseContext.pageY;
-
     let spawnTurret = document.createElement('div');
-    spawnTurret.setAttribute('id', turretCounter);
+    spawnTurret.setAttribute('id', 'drag-' + turretCounter);
     turretCounter++;
-    spawnTurret.setAttribute('class', 'gen-turret');
-    spawnTurret.setAttribute("class","turret-drag");
+    spawnTurret.setAttribute('class', 'gen-turret grabbable');
     spawnTurret.setAttribute("draggable","true");
-    spawnTurret.addEventListener('dragstart', turretDrag(spawnTurret));
-    document.getElementById('turret-spawn').appendChild(spawnTurret);
+    spawnTurret.addEventListener('dragstart', () => {turretDrag(spawnTurret)});
+    document.body.appendChild(spawnTurret);
 
 }
+
+// turret drag logic start
+
+let turretDrag = (turret) => {
+    // console log to check argument, and to see if it functions when being dragged 
+    console.log(turret);   
+    // grab mouse event and assign it to mouseContext
+    let mouseContext = window.event;
+    console.log(mouseContext)
+    // use the html drag and drop api to move the turret once bought:
+    mouseContext.dataTransfer.effectAllowed='move';
+    mouseContext.dataTransfer.setData('Text', turret.id)
+
+}
+
+let duringDrag = (dragEvent) => {
+    console.log(dragEvent)
+    // grab mouse context
+    dragEvent.preventDefault();
+    let mouseContext = window.event;
+    // ensure dragging behaviour is the same as the initialization of the drag
+    mouseContext.dataTransfer.dropEffect= 'move';
+
+}
+
+let dropTurret = (tileId) => {
+    console.log(tileId);
+}
+
+// turret drag logic end
