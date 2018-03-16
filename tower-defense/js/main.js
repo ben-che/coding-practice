@@ -172,7 +172,7 @@ const turretInfo = (id) => {
                 price : '10',
                 borderColor : 'red',
                 damage: 10,
-                radius:100
+                range:100
             }
         case 'turret-1':
             return {
@@ -180,7 +180,7 @@ const turretInfo = (id) => {
                 price : 100,
                 borderColor : 'blue',
                 damage:20,
-                radius: 150
+                range: 150
             }
     }
 }
@@ -291,12 +291,12 @@ let dropTurret = (event) => {
     //  the traits of this turret type
     // information inside each nested array is stored like this:
     //  damage, range, x-location, y-location, unqiue id
-    // turretPosition[turretCounter] = new Array( turretInfo(turretType).damage, turretInfo(turretType).range, x , y, 'id-'+turretCounter );
-    // console.log(turretPosition);
+    turretPosition[turretCounter - 1] = new Array( turretInfo(turretType).damage, turretInfo(turretType).range, x , y, data );
+    console.log(turretPosition);
 
     // once the player places the turret, it stays in place		
     turretContext.setAttribute("draggable","false");
-    // listenEvent(turret,"dragstart",cancelEvent);
+    turretContext.addEventListener('dragstart', (event) => cancelEvent(event));
 }
 
 // turret drag logic end
