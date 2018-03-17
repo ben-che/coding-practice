@@ -76,3 +76,14 @@
     background-color: yellow;
     background-image: linear-gradient(45deg,grey 25%,transparent 25%,transparent 50%,grey 50%,grey 75%,transparent 75%,transparent);
 }
+
+/* creeps */
+.gen-creep {
+	background-color: #87d;
+	position: absolute;
+	width: 15px; height: 15px;
+	border-radius: 50%;
+    top: 0px; 
+    left: 0px;	
+}
+ 

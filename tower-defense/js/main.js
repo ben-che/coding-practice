@@ -1,6 +1,4 @@
-// requiring packages:
-
-// Map creation //
+// Global variables and states //
 
 // defining the width and length of the game screen - we need these as fixed values for the
 //  map generation, enemy pathing, turret placement and lose condition
@@ -12,6 +10,9 @@ const tileWidth = 15;
 // eventually, we can have multiple levels and multiple maps - this will be implemented
 //  if there's enough time.
 let levelNum = 0;
+
+// start at wave 1, and as wave increases, enemies get stronger
+let levelWave = 1;
 
 // turretTypes defines the number of different turrets the game will have - as the game
 //  grows, we can increase this number
@@ -31,9 +32,173 @@ const turretDiameter = 5;
 const turretSpawnLeftOffset = 5;
 const turretSpawnTopOffset = 5;
 
+// player global variables
+
 // playerCash is how much in game currency the player has - will be changed
 //  as game progresses
-let playerCash = 1000;
+let playerCash = 100;
+
+// keeping track of player lives
+let playerLives = 10;
+
+// variable for whether or not the game is running
+let start = true;
+
+// creep global variables
+
+// globals for creep direction
+const MOVE_N = 1;
+const MOVE_S = -1;
+const MOVE_E = 2;
+const MOVE_W = -2;
+const MOVE_LAST = -99;
+
+
+let creepCounter = 10;
+
+// Game Logic
+// starts the game once the start button is pressed - it resets the board and variables
+//  to their original state
+let runGame = (event) => {
+    if (!start) {
+        console.log('game has not started')
+        return;
+    }
+    console.log('game has started')
+    // global variable reset
+    playerCash = 100;
+    playerLives = 10
+    turretCounter = 0;
+    turretPosition.length = 0;
+    levelWave = 1;
+    creepCounter = 10;
+    let creepId = 0;
+    
+    // board clear - removing turrets and creeps
+    let allTurrets = document.querySelectorAll(".gen-turret");
+    for (let i = 0; i < allTurrets.length; i++) {
+        document.body.removeChild(allTurrets[i]);
+    }
+
+    // now that the board is clear, we have to start spawning creeps -
+    //  each creep will be a div and have a unique id
+    for (let i = 0; i < creepCounter; i++) {
+        let creep = document.createElement('div');
+        creep.setAttribute('id', 'creep-'+creepId);
+        creepId++;
+        creep.setAttribute('class', 'gen-creep');
+        document.body.appendChild(creep);
+        console.log('creep spawned');
+    }
+
+    // create arrays that will eventually hold the x and y coordinates that, when combined,
+    //  will list out all positions of creeps
+    let moveX = new Array();    // holds x position of all creeps
+    let moveY = new Array();    // holds y position of all creeps
+
+    // movement logic
+    let creepDirection = new Array(); // array that holds the direction for each minion to move in
+    let creepSpawnCount = 1; // how many creeps have spawned thusfar
+    let creepsOnBoard = new Array();
+	let creepHp = new Array();  // array that holds all hp of creeps
+	let creepsKilled = new Array(); // true/false to indicate which creep is dead/alive
+	let creepsDead = 0; 
+    let waveOver = false;   // indicates when each wave is over - either all creeps are dead or player is
+
+    // reset creeps
+    let creeps = document.getElementsByClassName("gen-creep");
+    console.log(creeps)
+	for(let i = 0; i < creeps.length; i++) {
+		moveX[i] = 0;
+		moveY[i] = 0;
+		creepDirection[i] = MOVE_S;
+		creepsOnBoard[i] = 0;
+		creeps[i].style.display = "none";	
+		creepHp[i] = Math.pow(2, levelWave)*100;
+		creepsKilled[i] = true;
+    }
+    
+    // interval function that moves creeps every 30ms
+    timeTick = setInterval(() => {
+        for (let i = 0; i < creepCounter; i++) {
+            creepDirection[i] = creepMovement(moveX[i], moveY[i], creepDirection[i]);
+            console.log(creepDirection[i]);
+
+            // see which way to move, and update the data in the array
+            switch(creepDirection[i]) {
+                case MOVE_N:
+                    moveY[i] -= 1;
+                    break;
+                case MOVE_S:
+                    moveY[i] += 1;
+                    break;
+                case MOVE_E:
+                    moveX[i] += 1;
+                    break;
+                case MOVE_W:
+                    moveX[i] -= 1;
+                    break;
+            }
+
+            // update creep location
+            creeps[i].style.display = "block";	
+            creeps[i].style.top = moveY[i] + "px";	
+            creeps[i].style.left = moveX[i] + "px";
+        }
+    }, 30)
+    
+    
+}
+
+// creepMovement is a helper function that runs at a set interval and moves the creeps on
+//  the board accordingly
+// takes in an instance of the creep's x coordinates, y coordinates and the current creep direction
+let creepMovement = (x, y, dir) => {
+    // convert x and y and scale it to each tile's 
+    let curX = Math.floor((x + tileWidth / 2) / tileWidth);
+    let curY = Math.floor((y + tileHeight / 2) / tileHeight);
+
+    let newX = Math.floor(curX);
+    let newY = Math.floor(curY);
+
+    // next steps are to check which level we're on and use that level's map to check which
+    //  way the creeps will move - as new levels are added, this conditional block will need
+    //  to be updated as well - as it currently stands, there is only one level
+
+    switch(levelNum) {
+        case 0:
+        console.log('level zero hit');
+        // if the new position does not exist, it means the creep will fall off the map - we
+        //  have to redirect it
+        // if a tile east of the creep's current location exists, and if the new movement isn't
+        //  the opposite of east (otherwise the creep would be moving backwards), then allow the
+        //  creep to move east
+        if ( (levelZero(newX + 1), newY) && dir != MOVE_W) {
+            console.log('moving e')
+            return MOVE_E;
+        }
+        if ( (levelZero(newX - 1, newY)) && dir != MOVE_E) {
+            console.log('moving w')
+            return MOVE_W;
+        }
+        if ( levelZero(newX, newY - 1) && dir != MOVE_N ) {
+            console.log('moving s')
+            return MOVE_S;
+        }
+        if ( levelZero(newX, newY + 1) && dir != MOVE_S ) {
+            console.log('moving n')
+            return MOVE_N;
+        }
+        // if the new location does exist, then keep going, all is well
+        if (levelZero(newX, newY)) {
+            console.log('moving in the same direction')
+            return dir;
+        }
+    }
+
+    // if the board doesn't exist anywhere else, it means the creep has reached the end of their path
+    return MOVE_LAST;
+}
 
 // drawMap() takes in no arguments and returns no values, but will create a grid system for the rest of the 
 //  code to operate on, the UI and attach any methods the UI will have 
@@ -138,8 +303,10 @@ const drawMap = () => {
     // console.log('status bar created');
 }
 
+// =============== //
+// Map Generation  //
+// =============== //
 
-// Map Generation //
 // in general, these map generation helper functions will take in an x and y coordinate
 //  and return true or false - these values will be passed onto the main map drawing function
 //  and are used to determine whether or not the specific tile will be a path for the
@@ -158,8 +325,11 @@ const levelZero = (x,y) => {
         }
         return false;
 }
- 
+
+
+// ==================== //
 // Turret Functions //
+// ==================== //
 
 // function to determine individual turret ui stylings - used in the initial drawing of the map
 // turretInfo takes in a num (a unique turret id, in context), and returns an object with 
@@ -300,6 +470,11 @@ let dropTurret = (event) => {
 }
 
 // turret drag logic end
+// ==================== //
+// Turret Functions End //
+// ==================== //
+
+
 
 // Misc bug-squashing code
 // cancelEvent helps prevent strange default browser actions from happening during the 
