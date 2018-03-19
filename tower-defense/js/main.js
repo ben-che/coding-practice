@@ -47,8 +47,8 @@ let start = true;
 // creep global variables
 
 // globals for creep direction
-const MOVE_N = 1;
-const MOVE_S = -1;
+const MOVE_N = -1;
+const MOVE_S = 1;
 const MOVE_E = 2;
 const MOVE_W = -2;
 const MOVE_LAST = -99;
@@ -115,7 +115,7 @@ let runGame = (event) => {
 		moveY[i] = 0;
 		creepDirection[i] = MOVE_S;
 		creepsOnBoard[i] = 0;
-		creeps[i].style.display = "none";	
+		creeps[i].style.display = "block";	
         // creepHp[i] = Math.pow(2, levelWave)*100;
         creepHp[i] = 1;  // 1 hp for testing
         creepsKilled[i] = true;
@@ -180,7 +180,7 @@ let runGame = (event) => {
             let damage = checkTurretRange(creeps[i], moveX[i], moveY[i]);
             // subtract damage from remaining creep hp
             creepHp[i] -= damage;
-            console.log('creep hp:', creepHp[i]);
+            // console.log('creep hp:', creepHp[i]);
             // check to see if creep is dead
             if (creepHp[i] <=0 ) {
                 creeps[i].style.display='none'
@@ -189,9 +189,10 @@ let runGame = (event) => {
                     // creep is no longer alive
                     creepsKilled[i] = false;
                     creepsKilled++;
-
+                    
                     // add cash - base is 10, with additional increments per wave level
-                    playerCash += Math.floor((10 + (waveLevel*2.5)));
+                    playerCash += Math.floor((10 + (levelWave*2.5)));
+                    console.log('creep killed, playerCash is now', playerCash);
 
                     // if all creeps that are spawned are off the board (either killed
                     //  or reached end of board), the wave is over
@@ -200,9 +201,10 @@ let runGame = (event) => {
                     }
                     creeps[i].style.display = 'none';
                 }
-                // spawn creeps every 1.5 seconds until all creeps created earlier are on the board
-                if ((creepsOnBoard[i] === 150*creepSpawnCount) && creepSpawnCount < creeps.length) {
-                    creepCounter++;
+                // spawn creeps every 1 seconds until all creeps created earlier are on the board
+                if ((creepsOnBoard[i] === 100*creepSpawnCount) && creepSpawnCount < creeps.length) {
+                    creepSpawnCount++;
+
                 }
                 creepsOnBoard[i]++;
             }
@@ -245,7 +247,7 @@ let runGame = (event) => {
                 }
             }
         }
-    }, 1)
+    }, 10)
     
     
 }
@@ -262,6 +264,8 @@ let creepMovement = (x, y, dir) => {
     let newY = Math.floor(y);
     // console.log(newX);
     // console.log(newY)
+
+    console.log(Math.floor(x), Math.floor(y), "returns" + levelZero(Math.floor(x), Math.floor(y)));
 
     // check what direction we're going and check to see if a valid tile in that direction exists
     switch(dir) {
@@ -296,20 +300,19 @@ let creepMovement = (x, y, dir) => {
         // if a tile east of the creep's current location exists, and if the new movement isn't
         //  the opposite of east (otherwise the creep would be moving backwards), then allow the
         //  creep to move east
-        if ( (levelZero(Math.floor(x) + 1), Math.floor(y)) && dir != -MOVE_E) {
-            // console.log( (levelZero(Math.floor(curX) + 1), Math.floor(curY)) && dir != -MOVE_E);
-            // console.log('moving e')
+        if ( levelZero( (Math.floor(x) + 1), Math.floor(y) ) && dir != MOVE_W) {
+            console.log('moving e')
             return MOVE_E;
         }
-        if ( (levelZero(Math.floor(x) - 1, Math.floor(y))) && dir != -MOVE_W) {
+        if ( levelZero( (Math.floor(x) - 1), Math.floor(y) ) && dir != MOVE_E) {
             console.log('moving w')
             return MOVE_W;
         }
-        if ( levelZero(Math.floor(x), Math.floor(y) - 1) && dir != MOVE_S ) {
+        if ( levelZero( Math.floor(x), Math.floor(y) + 1 ) && dir != MOVE_N ) {
             console.log('moving s')
             return MOVE_S;
         }
-        if ( levelZero(Math.floor(x), Math.floor(y) + 1) && dir != MOVE_N ) {
+        if ( levelZero( Math.floor(x), Math.floor(y) - 1 ) && dir != MOVE_S ) {
             console.log('moving n')
             return MOVE_N;
         }
@@ -410,7 +413,7 @@ const drawMap = () => {
 	let statusBar = document.createElement("div");
 	statusBar.setAttribute("id","status-bar");
 	statusBar.setAttribute("class","status-bar");
-	statusBar.innerHTML = '<p> Cash: <span id="cash">$'+playerCash+ '</span> Score: <span id="score">0</span> Wave: <span id="wave">0</span> Lives: <span id="lives">0</span></p>';
+	statusBar.innerHTML = '<p> Cash: <span id="cash">$0</span>  Wave: <span id="wave">0</span> Lives: <span id="lives">0</span></p>';
     document.body.appendChild(statusBar);
     // console logs:
     // console.log('status bar created');
@@ -445,11 +448,20 @@ const levelZero = (x,y) => {
     // console.log(x, y);
 
     // defining the coordinates for enemy pathing
-    if(	( ((x === 0) && (y >= 0 && y <= 4))) ||
-        ( ((x >= 0 && x <= 74) && (y === 4))) || 
-        ( ((x === 75) && ( y >= 4 && y <= 6))) ||
-        ( ((x <= 75 && x >= 0) && ( y === 6 )))
-    )
+
+    // if(	( ((x === 0) && (y >= 0 && y <= 4))) ||
+    //     ( ((x >= 0 && x <= 74) && (y === 4))) || 
+    //     ( ((x === 75) && ( y >= 4 && y <= 6))) ||
+    //     ( ((x <= 75 && x >= 0) && ( y === 6 )))
+    // )
+
+    if ( ((x === 0) && (y >= 0 && y <= 28)) ||
+         ((x === 0) && (y === 28)) ||
+         ((x === 1) && (y === 28)) ||
+         ((x === 2) && (y === 28)) ||
+         ((x === 2) && (y <= 28 && y >= 0))
+        )
+
 	{  
         // console.log('returning true')
 		return true;
@@ -471,7 +483,7 @@ const turretInfo = (id) => {
         case 'turret-0':
             return {
                 name: 'weak',
-                price : '10',
+                price : 10,
                 borderColor : 'red',
                 damage: 10,
                 range:100
@@ -604,8 +616,8 @@ let checkTurretRange = (creep, x, y) => {
     let damage = 0;
     
     for (let i = 0; i < turretCounter; i++) {
-        console.log('num of turrets logged in var:', turretCounter);
-        console.log('num of turrets actually in array: ', turretPosition.length)
+        // console.log('num of turrets logged in var:', turretCounter);
+        // console.log('num of turrets actually in array: ', turretPosition.length)
         // turretPosition array elements are composed of :
         //  damage, range, x-location, y-location, and unqiue id in that order
         let turretX = turretPosition[i][2];
@@ -650,3 +662,8 @@ let cancelEvent = (event) => {
 	}
 }
  
+
+
+// ISSUES:
+// - creep pathing: x values are returning true, even when it should return false
+// - only one creep is being released at a time
