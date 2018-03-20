@@ -2,7 +2,7 @@
 
 // defining the width and length of the game screen - we need these as fixed values for the
 //  map generation, enemy pathing, turret placement and lose condition
-const gameWidth = 110;
+const gameWidth = 113;
 const gameHeight = 30;
 const tileHeight = 15;
 const tileWidth = 15;
@@ -24,8 +24,8 @@ let turretCounter = 0;
 let turretPosition = new Array; // initialize array this way so we have access to specific indicies
 
 // here, we define baseline turret styles that we will use to style all the turret positions:
-const turretLeftOffset = 200;
-const turretMargin = 50;
+const turretLeftOffset = 355;
+const turretMargin = 100;
 const turretDiameter = 5;
 
 // here, we define the turret spawn offset:
@@ -413,8 +413,8 @@ const drawMap = () => {
     // creation of the start button will be done similar to above
 	let startButton = document.createElement("div");
 	startButton.setAttribute("id","start-button");
-	startButton.setAttribute("class","gen-button-ui start-button");
-	startButton.innerHTML = "<p> start game </p>";
+    startButton.setAttribute("class","gen-button-ui start-button");
+	// startButton.innerHTML = "<p> start game </p>";
     document.body.appendChild(startButton);
     // clicking start button starts the game
     document.getElementById('start-button').addEventListener('click', startGame);
@@ -429,13 +429,21 @@ const drawMap = () => {
     document.body.appendChild(statusBar);
     // console logs:
     // console.log('status bar created');
-
+    
     // creating a turret spawn point where turrets will spawn when they're clicked
+    let turretSpawnHead = document.createElement("div");
+    turretSpawnHead.setAttribute("class","turret-spawn-header");
+    turretSpawnHead.innerHTML = '<p style="margin:0;"> turrets spawn here </p>';
+    document.body.appendChild(turretSpawnHead);
 	let turretSpawn = document.createElement("div");
 	turretSpawn.setAttribute("id","turret-spawn");
 	turretSpawn.setAttribute("class","turret-spawn");
-	turretSpawn.innerHTML = '<p> turrets spawn here </p>';
+	// turretSpawn.innerHTML = '<p> turrets spawn here </p>';
     document.body.appendChild(turretSpawn);
+    let turretSpawnCenter = document.createElement("div");
+    turretSpawnCenter.setAttribute("id","turret-spawn-center");
+    turretSpawnCenter.setAttribute("class","turret-spawn-center");
+    document.body.appendChild(turretSpawnCenter);
     // console logs:
     // console.log('status bar created');
 }
@@ -544,7 +552,19 @@ const turretBuy = (id) => {
     //  id will be: < turrettype-# : uniqueturretID >
     spawnTurret.setAttribute('id', id+":"+'drag-' + turretCounter);
     turretCounter++;
-    spawnTurret.setAttribute('class', 'gen-turret grabbable');
+
+    // seeing which turret id was clicked, and which class to append
+    switch(id) {
+        case 'turret-0':
+        console.log('spawning weak turret')
+        spawnTurret.setAttribute('class','gen-turret grabbable t00');
+        break; 
+        
+        case 'turret-1':
+        console.log('spawning strong turret');
+        spawnTurret.setAttribute('class', 'gen-turret grabbable t01');
+        break;
+    }
     spawnTurret.setAttribute("draggable","true");
     spawnTurret.addEventListener('dragstart', (event) => {turretDrag(spawnTurret, event)});
     document.body.appendChild(spawnTurret);
