@@ -2,7 +2,7 @@
 
 // defining the width and length of the game screen - we need these as fixed values for the
 //  map generation, enemy pathing, turret placement and lose condition
-const gameWidth = 80;
+const gameWidth = 110;
 const gameHeight = 30;
 const tileHeight = 15;
 const tileWidth = 15;
@@ -39,7 +39,7 @@ const turretSpawnTopOffset = 5;
 let playerCash = 100;
 
 // keeping track of player lives
-let playerLives = 10;
+let playerLives = 1;
 
 // variable for whether or not the game is running
 let start = true;
@@ -67,7 +67,7 @@ let runGame = (event) => {
     console.log('game has started')
     // global variable reset
     playerCash = 100;
-    playerLives = 10
+    playerLives = 1;
     turretCounter = 0;
     turretPosition.length = 0;
     levelWave = 1;
@@ -86,9 +86,9 @@ let runGame = (event) => {
         let creep = document.createElement('div');
         creep.setAttribute('id', 'creep-'+creepId);
         creepId++;
-        creep.setAttribute('class', 'gen-creep');
+        creep.setAttribute('class', 'gen-creep alive');
         document.body.appendChild(creep);
-        console.log('creep spawned');
+        console.log('creep id #', creepId, ' spawned');
     }
 
     // create arrays that will eventually hold the x and y coordinates that, when combined,
@@ -99,9 +99,9 @@ let runGame = (event) => {
     // movement logic
     let creepDirection = new Array(); // array that holds the direction for each minion to move in
     let creepSpawnCount = 1; // how many creeps have spawned thusfar
-    let creepsOnBoard = new Array();    // add every time a new creep is spawned
+    let creepsSpawnRate = new Array();    // add every time a new creep is spawned
 	let creepHp = new Array();  // array that holds all hp of creeps
-	let creepsKilled = new Array(); // true/false to indicate which creep is dead/alive
+	let creepsAliveList = new Array(); // true/false to indicate which creep is dead/alive
 	let creepsDead = 0; 
     let waveOver = false;   // indicates when each wave is over - either all creeps are dead or player is
     let livesLost = 0;      // how many lives have been lost thusfar
@@ -114,11 +114,11 @@ let runGame = (event) => {
 		moveX[i] = 0;
 		moveY[i] = 0;
 		creepDirection[i] = MOVE_S;
-		creepsOnBoard[i] = 0;
-		creeps[i].style.display = "block";	
-        // creepHp[i] = Math.pow(2, levelWave)*100;
-        creepHp[i] = 1;  // 1 hp for testing
-        creepsKilled[i] = true;
+		creepsSpawnRate[i] = 0;
+		creeps[i].style.display = "none";	
+        creepHp[i] = Math.pow(2, levelWave)*100;
+        // creepHp[i] = 1;  // 1 hp for testing
+        creepsAliveList[i] = true;
     }
     
     // interval function that moves creeps every 30ms
@@ -131,18 +131,29 @@ let runGame = (event) => {
             if (creepDirection[i] === MOVE_LAST) {
 
                 // creep leaves map
-                if (creeps[i].style.display === 'none') {
+                if (creeps[i].classList.contains('alive')) {
                     // lose a life
-                    playerLives -= 1;
+                    console.log('leak - 1 life lost')
+                    playerLives = playerLives - 1;
                     livesLost++;
+                    creeps[i].classList.remove('alive')
+                    console.log(playerLives)
+                    console.log(livesLost)
+                    console.log(creeps[i].classList)
+                    console.log(creeps.length)
+                    // TEMPORARY CODE FOR TESTING
+
                 }
                 // creep reaches end of map
+                creeps[i].classList.remove('alive')
                 creeps[i].style.display = 'none';
 
                 // player runs out of lives
                 if (playerLives <= 0) {
+                    console.log('out of lives');
                     waveOver = true;
-                    start = false;
+                    document.getElementById('game-over').classList.remove('hidden');
+                    clearInterval(timeTick);
                     break;
                 }
                 // once all the creeps have been killed, we can progress onto the next round!
@@ -182,13 +193,13 @@ let runGame = (event) => {
             creepHp[i] -= damage;
             // console.log('creep hp:', creepHp[i]);
             // check to see if creep is dead
-            if (creepHp[i] <=0 ) {
-                creeps[i].style.display='none'
+            if (creepHp[i] <= 0 ) {
+                creeps[i].classList.remove('alive');
                 // see if creep is still alive 
-                if (creepsKilled[i]) {
+                if (creepsAliveList[i]) {
                     // creep is no longer alive
-                    creepsKilled[i] = false;
-                    creepsKilled++;
+                    creepsAliveList[i] = false;
+                    creepsDead++;
                     
                     // add cash - base is 10, with additional increments per wave level
                     playerCash += Math.floor((10 + (levelWave*2.5)));
@@ -196,17 +207,17 @@ let runGame = (event) => {
 
                     // if all creeps that are spawned are off the board (either killed
                     //  or reached end of board), the wave is over
-                    if (creepsKilled === (creeps.length - livesLost)) {
+                    if (creepsDead === (creeps.length - livesLost)) {
                         waveOver = true;
                     }
-                    creeps[i].style.display = 'none';
-                }
+                    
+                } creeps[i].style.display = 'none';
                 // spawn creeps every 1 seconds until all creeps created earlier are on the board
-                if ((creepsOnBoard[i] === 100*creepSpawnCount) && creepSpawnCount < creeps.length) {
+                if ((creepsSpawnRate[i] === 50*creepSpawnCount) && creepSpawnCount < creeps.length) {
                     creepSpawnCount++;
 
                 }
-                creepsOnBoard[i]++;
+                creepsSpawnRate[i]++;
             }
             // update the cash display every tick to ensure that the game displays updated playerCash
             let cash = document.getElementById("cash");
@@ -219,6 +230,7 @@ let runGame = (event) => {
             // update the amount of lives the player has
             var lives = document.getElementById("lives");
             lives.innerHTML = playerLives;
+            // console.log('checking lives - ', playerLives)
 
             // check to see if the wave is over
             if (waveOver) {
@@ -231,19 +243,19 @@ let runGame = (event) => {
                 }
                 // reset variables for next wave
                 creepSpawnCount = 1;
-                creepsKilled = 0;
+                creepsDead = 0;
                 waveOver = false;
-                currentWave++;
+                levelWave++;
                 // reset creep-specific variables
                 for(let i = 0; i < creeps.length; i++) {
                     moveX[i] = 0;
                     moveY[i] = 0;
                     creepDirection[i] = MOVE_S;
-                    creepsOnBoard[i]=0;
+                    creepsSpawnRate[i]=0;
                     creeps[i].style.display = 'none';
-                    // creepHp[i] = Math.pow(2, levelWave)*100;
-                    creepHp[i] = 1;
-                    creepsKilled[i] = true;
+                    creepHp[i] = Math.pow(2, levelWave)*50;
+                    // creepHp[i] = 1;
+                    creepsAliveList[i] = true;
                 }
             }
         }
@@ -264,8 +276,8 @@ let creepMovement = (x, y, dir) => {
     let newY = Math.floor(y);
     // console.log(newX);
     // console.log(newY)
-
-    console.log(Math.floor(x), Math.floor(y), "returns" + levelZero(Math.floor(x), Math.floor(y)));
+    // console log to see if location is valid:
+    // console.log(Math.floor(x), Math.floor(y), "returns" + levelZero(Math.floor(x), Math.floor(y)));
 
     // check what direction we're going and check to see if a valid tile in that direction exists
     switch(dir) {
@@ -483,17 +495,17 @@ const turretInfo = (id) => {
         case 'turret-0':
             return {
                 name: 'weak',
-                price : 10,
+                price : 20,
                 borderColor : 'red',
-                damage: 10,
-                range:100
+                damage: 6,
+                range:60
             }
         case 'turret-1':
             return {
                 name: 'medium',
-                price : 100,
+                price : 70,
                 borderColor : 'blue',
-                damage:20,
+                damage:10,
                 range: 150
             }
     }
@@ -618,16 +630,21 @@ let checkTurretRange = (creep, x, y) => {
     for (let i = 0; i < turretCounter; i++) {
         // console.log('num of turrets logged in var:', turretCounter);
         // console.log('num of turrets actually in array: ', turretPosition.length)
-        // turretPosition array elements are composed of :
-        //  damage, range, x-location, y-location, and unqiue id in that order
-        let turretX = turretPosition[i][2];
-        let turretY = turretPosition[i][3];
-
+        
+        // adding this if statement fixes visual bugs on the map, for when user buys a new turret,
+        //      but the turret x and y locations aren't defined on the map yet and return undefined
+        if (turretPosition[i]) {
+            // turretPosition array elements are composed of :
+            //  damage, range, x-location, y-location, and unqiue id in that order
+            let turretX = turretPosition[i][2];
+            let turretY = turretPosition[i][3];
+        
         if (radiusCalc(x, turretX, y, turretY) <= turretPosition[i][1]) {
             // creep takes damage - flash red as visual indicator
-            creep.style.backgroundColor='red';
+            // UPDATE - LOOKS WEIRD WITH SPRITES - SHOULD HAVE CUSTOM HURT ANIMATIONS EVENTUALLY
+            // creep.style.backgroundColor='red';
             damage += turretPosition[i][0]; 
-        }
+        }}
     }
     // if creep is not taking damage, keep background transparent
     if (damage === 0) {
@@ -667,3 +684,6 @@ let cancelEvent = (event) => {
 // ISSUES:
 // - creep pathing: x values are returning true, even when it should return false
 // - only one creep is being released at a time
+
+// - game over screen
+// - fix creep hp styling
