@@ -41,8 +41,8 @@
 }
 /* turret styles */
 .gen-turret-ui {
-    background-color: #C0C0C0;
-    opacity: 0.7;
+    background-color: #eee;
+    /* opacity: 0.7; */
     border: 2px solid #000000;
     position: absolute;
     top: 500px; left: 0px;
@@ -51,6 +51,25 @@
     text-align: center;
     -moz-border-radius: 20px;
     -webkit-border-radius: 20px;
+    z-index:2;
+}
+
+.ui-00 {
+    background: url('../img/tower0.png');
+    background-size: 35px 35px;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 3;
+    background-color:#eee;
+}
+
+.ui-01 {
+    background:url('../img/tower1.png');
+    background-size:32px 32px;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 3;
+    background-color:#eee;
 }
 
 /* individual turret appearances */
@@ -59,9 +78,31 @@
     background-size:cover;
 }
 
+.t00-range {
+    padding: 15px;
+    background-color: rgba(193, 66, 66, 0.5);
+    border: 1px solid thin rgba(193, 66, 66, 0.5);
+    border-radius:50%;
+    top: 558.5px;
+    left:845.5px;
+    z-index: 2;
+    position: absolute;
+}
+
 .t01 {
      background: url('../img/tower1.png');
      background-size:cover;
+}
+
+.t01-range {
+    padding: 30px;
+    background-color: rgba(193, 66, 66, 0.5);
+    border: 1px solid thin rgba(193, 66, 66, 0.5);
+    border-radius:50%;
+    top: 558.5px;
+    left:845.5px;
+    z-index: 2;
+    position: absolute;
 }
 
 .gen-turret {
@@ -72,6 +113,7 @@
     top: 567px;
     left:853px;
     position:absolute;
+    z-index:3;
 }
 
 .grabbable {
@@ -87,6 +129,7 @@
     cursor: -moz-grabbing;
     cursor: -webkit-grabbing;
 }
+
 .turret-spawn-header {
     position:absolute;
     top:470px;
@@ -99,6 +142,7 @@
     text-align: center;
     margin:0;
 }
+
 .turret-spawn {
     position: absolute;
     top: 500px;
@@ -166,4 +210,16 @@ body {
 }
 .hidden {
     display:none;
+}
+
+/* level selector */
+.text-writeup {
+    position:absolute;
+    margin-left: 1100px;
+    margin-top: 470px;
+    padding: 5px;
+    width: 450px;
+    height:200px;
+    background-color:#333;
+    z-index:2;
 }

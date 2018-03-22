@@ -24,7 +24,7 @@ let turretCounter = 0;
 let turretPosition = new Array; // initialize array this way so we have access to specific indicies
 
 // here, we define baseline turret styles that we will use to style all the turret positions:
-const turretLeftOffset = 355;
+const turretLeftOffset = 385;
 const turretMargin = 100;
 const turretDiameter = 5;
 
@@ -393,7 +393,7 @@ const drawMap = () => {
         //  this is where turrets are created
         let turret = document.createElement('div');
         turret.setAttribute('id', 'turret-'+k);
-        turret.setAttribute('class','gen-turret-ui');
+        turret.setAttribute('class','gen-turret-ui ui-0'+k);
         // individual turret styles:
         turret.style.left = (turretLeftOffset + (turretDiameter + turretMargin) * k) +'px';
         turret.style.borderColor = turretInfo(turret.id).borderColor;
@@ -446,6 +446,10 @@ const drawMap = () => {
     document.body.appendChild(turretSpawnCenter);
     // console logs:
     // console.log('status bar created');
+    let gameDesc = document.createElement("div");
+    gameDesc.setAttribute("class","text-writeup");
+    gameDesc.innerHTML = '<p> Creeps will start spawning once you press start - build towers to stop them from reaching the end of the map! </p>'
+    document.body.appendChild(gameDesc);
 }
 
 // event listener placed on the start button for starting the game
@@ -505,16 +509,17 @@ const turretInfo = (id) => {
                 name: 'weak',
                 price : 20,
                 borderColor : 'red',
-                damage: 6,
-                range:60
+                damage: 3,
+                range:30,
+                // background: 'url("../img/tower0")'
             }
         case 'turret-1':
             return {
                 name: 'medium',
                 price : 70,
                 borderColor : 'blue',
-                damage:10,
-                range: 150
+                damage:7,
+                range: 60
             }
     }
 }
@@ -569,6 +574,7 @@ const turretBuy = (id) => {
     spawnTurret.addEventListener('dragstart', (event) => {turretDrag(spawnTurret, event)});
     document.body.appendChild(spawnTurret);
 
+   
 
 }
 
@@ -642,6 +648,29 @@ let dropTurret = (event) => {
     // once the player places the turret, it stays in place		
     turretContext.setAttribute("draggable","false");
     turretContext.addEventListener('dragstart', (event) => cancelEvent(event));
+
+     // adjusting the visual radius indicator of the turrets
+     let turretRangeIndicator = document.createElement('div');
+     
+     // because each turret has a different range, there have to be manual adjustments made for each turret type
+     switch(turretType) {
+         case 'turret-0':
+         console.log('spawning weak turret range');
+         turretRangeIndicator.setAttribute('class', 't00-range');
+         turretRangeIndicator.style.top = (y - 8.5 )+'px';
+         turretRangeIndicator.style.left = (x - 7.5) + "px";
+        //  console.log(turretRangeIndicator.style.top);
+         break; 
+         
+         case 'turret-1':
+         console.log('spawning strong turret range');
+         turretRangeIndicator.setAttribute('class', 't01-range');
+         turretRangeIndicator.style.top = (y - 22 )+'px';
+         turretRangeIndicator.style.left = (x - 23) + "px";
+         turretRangeIndicator.setAttribute('class', 't01-range');
+         break;
+     }
+     document.body.appendChild(turretRangeIndicator);
 }
 
 let checkTurretRange = (creep, x, y) => {
@@ -680,10 +709,14 @@ let radiusCalc = (x1,x2,y1,y2) => {
     return Math.sqrt(Math.pow(x1-x2,2) + Math.pow(y1-y2,2));
 }
 
+
+// turret firing animations //
+
 // turret drag logic end
 // ==================== //
 // Turret Functions End //
 // ==================== //
+
 
 
 
@@ -705,5 +738,5 @@ let cancelEvent = (event) => {
 // - creep pathing: x values are returning true, even when it should return false
 // - only one creep is being released at a time
 
-// - game over screen
-// - fix creep hp styling
+// - game over screen (DONE)
+// - fix creep hp styling 
