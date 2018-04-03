@@ -116,7 +116,7 @@ let runGame = (event) => {
 		creepDirection[i] = MOVE_S;
 		creepsSpawnRate[i] = 0;
 		creeps[i].style.display = "none";	
-        creepHp[i] = Math.pow(2, levelWave)*100;
+        creepHp[i] = Math.pow(2, levelWave)*200;
         // creepHp[i] = 1;  // 1 hp for testing
         creepsAliveList[i] = true;
     }
@@ -126,10 +126,16 @@ let runGame = (event) => {
         for (let i = 0; i < creepSpawnCount; i++) {
             creepDirection[i] = creepMovement(moveX[i], moveY[i], creepDirection[i]);
             // console.log(creepDirection[i]);  
-            
+            console.log(creeps[i].style.left, creeps[i].style.top)
+            if (creeps[i].style.top === '7px' && creeps[i].style.left === '1193px' && creeps[i].style.display === 'none') {
+                console.log('hit the temp game over')
+                document.getElementById('game-over').classList.remove('hidden');
+            }
+
+
             // check if creep fell off map
             if (creepDirection[i] === MOVE_LAST) {
-
+                
                 // creep leaves map
                 if (creeps[i].classList.contains('alive')) {
                     // lose a life
@@ -152,8 +158,8 @@ let runGame = (event) => {
                 if (playerLives <= 0) {
                     console.log('out of lives');
                     waveOver = true;
-                    document.getElementById('game-over').classList.remove('hidden');
-                    clearInterval(timeTick);
+                    // document.getElementById('game-over').classList.remove('hidden');
+                    // clearInterval(timeTick);
                     break;
                 }
                 // once all the creeps have been killed, we can progress onto the next round!
@@ -213,7 +219,7 @@ let runGame = (event) => {
                     
                 } creeps[i].style.display = 'none';
                 // spawn creeps every 1 seconds until all creeps created earlier are on the board
-                if ((creepsSpawnRate[i] === 50*creepSpawnCount) && creepSpawnCount < creeps.length) {
+                if ((creepsSpawnRate[i] === 100*creepSpawnCount) && creepSpawnCount < creeps.length) {
                     creepSpawnCount++;
 
                 }
@@ -239,7 +245,7 @@ let runGame = (event) => {
                     let lives = document.getElementById('lives');
                     lives.innerHTML = 'dead'
                     // stop the game because palyer loses
-                    clearInterval(timeTick);
+                    // clearInterval(timeTick);
                 }
                 // reset variables for next wave
                 creepSpawnCount = 1;
@@ -253,13 +259,13 @@ let runGame = (event) => {
                     creepDirection[i] = MOVE_S;
                     creepsSpawnRate[i]=0;
                     creeps[i].style.display = 'none';
-                    creepHp[i] = Math.pow(2, levelWave)*50;
+                    creepHp[i] = Math.pow(2, levelWave)*200;
                     // creepHp[i] = 1;
                     creepsAliveList[i] = true;
                 }
             }
         }
-    }, 10)
+    }, 1)
     
     
 }
@@ -307,6 +313,11 @@ let creepMovement = (x, y, dir) => {
             // console.log('moving in the same direction')
             return dir;
         }
+        // end of the map - hardcoded:
+        if (newX === 1200 && newY === 0) {
+            console.log('end of board')
+            return MOVE_LAST;
+        }
         // if the new position does not exist, it means the creep will fall off the map - we
         //  have to redirect it
         // if a tile east of the creep's current location exists, and if the new movement isn't
@@ -329,7 +340,7 @@ let creepMovement = (x, y, dir) => {
             return MOVE_N;
         }
         // if the board doesn't exist anywhere else, it means the creep has reached the end of their path
-        return MOVE_LAST;
+        // return MOVE_LAST;
     }
 
     
@@ -496,7 +507,32 @@ const levelZero = (x,y) => {
          ((x === 40) && (y <= 27 && y >= 24)) ||
          ((x <= 40 && x >= 18) && (y ===24)) ||
          ((x === 18) && (y <= 24 && y >=15)) || 
-         ((x >= 18 && x <= 30) && y === 15) 
+         ((x >= 18 && x <= 30) && y === 15) ||
+         ((x === 30) && (y >= 15 && y <= 20)) ||
+         ((x <= 30 && x >= 20) && (y === 20)) ||
+         ((x === 20) && (y >= 20 && y <= 22)) ||
+         ((x >= 20 && x <= 33 ) && (y === 22 )) ||
+         ((x === 33) && (y <= 22 && y >= 2)) ||
+         ((x <= 33 && x >= 18) && y === 2 ) ||
+         ((x === 18) && (y >=2 && y <= 13)) ||
+         ((x >= 18 && x <= 35) && y === 13) ||
+         ((x === 35) && (y <= 13 && y >= 2)) ||
+         ((x >= 35 && x <= 78) && y === 2) ||
+         ((x === 78) && (y >= 2 && y <= 24)) ||
+         ((x <= 78 && x >= 45) && y === 24) ||
+         ((x === 45 ) && (y <= 24 && y >= 5)) ||
+         ((x >= 45 && x <=73 ) && (y === 5)) ||
+         ((x === 73) && (y >= 5 && y <= 8)) ||
+         ((x <= 73 && x >= 38) && (y === 8)) ||
+         ((x === 38) && (y >= 8 && y <= 12)) ||
+         ((x >= 38 && x <= 73) && y === 12) ||
+         ((x === 73) && (y >= 12 && y <= 18)) ||
+         ((x <= 73 && x >= 38) && y === 18) ||
+         ((x === 38) && (y >= 18 && y <= 22)) ||
+         ((x >= 38 && x <= 50) && y === 22) ||
+         ((x === 50) && (y >= 22 && y <= 27)) ||
+         ((x >= 50 && x <= 80) && (y === 27)) ||
+         ((x === 80) && (y <= 27 && y >= 0))
         )
 
 	{  
@@ -522,7 +558,7 @@ const turretInfo = (id) => {
                 name: 'weak',
                 price : 20,
                 borderColor : 'red',
-                damage: 3,
+                damage: 1,
                 range:30,
                 // background: 'url("../img/tower0")'
             }
@@ -531,7 +567,7 @@ const turretInfo = (id) => {
                 name: 'medium',
                 price : 70,
                 borderColor : 'blue',
-                damage:7,
+                damage: 2,
                 range: 60
             }
     }
