@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Simple Sequence</title>
+	<meta charset="UTF-8">
+	<link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+	<style>
+		body {
+			background: #000 url(img/bg-body.jpg) repeat-x;
+			font-family: 'Bree Serif', sans-serif;
+			color:#eee;
+		}
+		.panel {
+			position: relative;
+			width: 760px;
+			height: 224px;
+			background: #000;
+			margin: 20px auto 0 auto;
+			overflow: hidden;
+		}
+		#bg {
+			position: absolute;
+		}
+		#logo {
+			position: absolute;
+			left: 20px;
+			top: 5px;
+		}
+		#address {
+			position: absolute;
+			left: 483px;
+			top: 184px;
+			color: #fcb802;
+			width: 300px;
+		}
+		#content {
+			position: relative;
+			width: 720px;
+			padding: 20px;
+			background: #222;
+			margin: 0px auto 0 auto;
+		}
+		.nav {
+			text-align: center;
+			margin: 20px auto;
+			width: 500px;
+			height: 80px;
+		}  
+		h1 {
+			margin:0;
+		}
+		p {
+			color:#ccc;
+		} 
+		button {
+			padding:10px;
+			margin:20px;
+		}
+	</style>
+</head>
+<body>
+
+<div class="panel">
+	<img id="bg" src="img/skyline.jpg" width="760" height="225">
+	<img id="logo" src="img/jf-logo.png" width="250" height="216">
+	<div id="address">580 Lispenard St. New York NY 10012</div>
+</div>
+
+<div id="content">
+	<h1>The Jive Factory</h1>
+	<p>The Jive Factory is a restaurant and venue in Lower Manhattan, dedicated to the best food and music the city has to offer. Stop in for dinner, stick around for a drink, and see the greatest up-and-coming acts in a small and friendly performance space.</p>
+
+	<p>We have a dining room and a full bar on the ground floor, and a large concert space downstairs with a stage, open standing room, and a second bar in the back.</p>
+</div>
+
+
+<!-- load scripts after dom has been rendered -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenLite.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/easing/EasePack.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/plugins/CSSPlugin.min.js"></script>
+
+<script>
+
+	TweenLite.from('#bg', 1, {opacity:0});
+	TweenLite.from('#logo', 1, {x:-200, rotation:-90, scale:0, ease:Back.easeOut, delay:1});
+	TweenLite.from('#address', 1, {x:100, opacity:0, ease:Back.easeOut, delay:2});
+	TweenLite.from('#content', .5, {opacity:0, y:100, delay:3});
+
+	/*
+		This works, but not as good as a timeline (see 2-timeline-control.html).
+		It's difficult to update durations and delays.
+		Impossible to play, pause, reverse the entire sequence (without a timeline).
+	*/
+
+</script>
+</body>
+</html>

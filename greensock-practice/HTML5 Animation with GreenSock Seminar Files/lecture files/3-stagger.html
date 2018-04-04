@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Stagger Demo</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			background: linear-gradient(to left, #02aab0, #00cdac);
+			color: #fff;
+			text-align: center;
+			font-size: 2rem;
+			font-weight: 100;
+		}
+		p {
+			margin: .1em;
+		}
+		.wrapper {
+			height: 95vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-flow: column;
+		}
+		.box {
+			width: 30px;
+			height: 30px;
+			background: linear-gradient(to left, #ff512f, #dd2476);
+			margin: 40px 10px;
+			display: inline-block;
+			border-radius: 4px;
+		}
+	</style>
+</head>
+<body>
+	
+	<div class="wrapper">
+		<p>Web</p>
+		<p>Animation</p>
+		<p>is</p>
+		<p>better</p>
+		<p>with</p>
+		<p>the</p>
+		<p>GreenSock</p>
+		<p>Animation</p>
+		<p>Platform</p>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
+	<script>
+		// Explanation of Syntax:
+		// TweenMax.staggerFrom(target, durationOfAnimation, {vars}, staggerAmount);
+
+		// Examples Below:
+		TweenMax.staggerFrom('p', 1, {opacity:0}, .1);
+		// TweenMax.staggerFrom('p', .2, {opacity:0, scale:.5}, .1);
+		// TweenMax.staggerFrom('p', .2, {opacity:0, scale:.5, y:-80}, .1);
+		// TweenMax.staggerFrom('p', .4, {opacity:0, scale:.5, y:-30, ease:Back.easeOut.config(3)}, .1);
+	</script>
+</body>
+</html>

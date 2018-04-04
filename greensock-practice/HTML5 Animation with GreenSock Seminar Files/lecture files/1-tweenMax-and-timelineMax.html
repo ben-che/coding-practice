@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Tween and Timeline Demo</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			background: #ddd;
+			text-align: center;
+		}
+		h1 {
+			text-align: center;
+			display: inline-block;
+			margin-top: 2rem;
+			font-size: 3rem;
+		}
+		.content {
+			height: 90vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-flow: column;
+		}
+		.logo {
+			width: 40vw;
+			display: block;
+			margin-top: 5vh;
+		}
+		.background {
+			background: url(img/star.svg) no-repeat center ;
+			background-size: contain;
+			width: 100%;
+			height: 100vh;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: -1;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="content">
+			<img class="logo" src="img/html5-logo.svg" alt="HTML5 Logo">
+			<h1>Fun with Animation!</h1>
+		</div>
+		<div class="background"></div>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
+	<script>
+		// START HERE: Explanation of Syntax:
+
+		// TweenMax loads all features (TweenLite for slimmer package )
+
+		// the .to() method is the main animation method in GSAP
+		//	it takes in what to animate, the total duration of the animation and actual css property to change
+		//	the syntax looks like this:	
+
+		// TweenMax.to(target, duration, {vars});
+		//	, where target is a string css selector (similar to jquery's '.class' and '#id')
+		//			duration is a num in seconds,
+		//			and { style : value } is an object holding the css proerty to change and its new value
+
+		// Examples Below:
+		// let's animate the html5 logo:
+		// this will cause the logo to fade from opacity 100 to 0 - effectively hiding our logo
+		// TweenMax.to('.logo', 1, {opacity:0});
+
+		// that may not be what we want - we want our logo to appear on the page - and if we call the .from()
+		//	method, we can do that:
+		// note: when using the from() method, the function takes in what the animation will start as, and we have to
+		//	code what our website will end up like on the front end 
+		// this will cause our logo to, effectively, appear on our screen by starting FROM opacity 0 and changing into
+		//	the default opacity 1 across 1 second.
+		// TweenMax.from('.logo', 1, {opacity:0});
+		// we can also change different styles like scale to give the appearance of the element growing in size
+		// TweenMax.from('.logo', 1, {scale:.5});
+
+
+		// Animating Multiple Elements:
+		// 	we can animate multiple elements and different types in each element
+		// TweenMax.from('.logo', 1, {scale:0});
+		// we can also "stagger" each animation by adding a delay:
+		//	the background animation will be delayed one second
+		// TweenMax.from('.background', 1, {opacity:0, scale:0, delay:1});
+		//	the h1 animation will be delayed 2 seconds
+		// TweenMax.from('h1', 1, {opacity:0, scale:2, delay:2});
+
+
+		// Using delays to manage longer animations is hard - there is a built in feature
+		//	for creating a sequential timeline:
+		// the order of the items after the timeline matters - the animations will run in a syncronous manner
+		// let timeline = new TimelineMax();
+		// timeline.from('.logo', .5, {scale:0})
+		// timeline.from('h1', .5, {opacity:0, scale:2})
+		// timeline.from('.background', .5, {scale:0})
+
+		// Easing
+		// 	linear animations look like cheap powerpoint effects, and easing / CB curves can help
+		//	reduce this effect - there is a full list of package easing properties to reference here:
+		// docs: https://greensock.com/ease-visualizer
+		let timeline = new TimelineMax();
+		timeline.from('.logo', 1, {scale:0, ease:Bounce.easeOut})
+		timeline.from('.background', .3, {scale:0})
+		timeline.from('h1', .7, {opacity:0, scale:2, ease:Back.easeOut.config(4)})
+	</script>
+</body>
+</html>
