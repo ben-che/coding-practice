@@ -101,10 +101,25 @@
 		// 	linear animations look like cheap powerpoint effects, and easing / CB curves can help
 		//	reduce this effect - there is a full list of package easing properties to reference here:
 		// docs: https://greensock.com/ease-visualizer
+		// generally, you can have the animation style - ie. exponential, power2, bounce, elastic, etc, and you also
+		//	specifiy a animation type - easeIn, easeOut - these are also found within the ease visualizer with examples
+		// let timeline = new TimelineMax();
+		// we can add ease animation now by utilizing the ease attribute and then adding the style and type to it as a value
+		// timeline.from('.logo', 1, {scale:0, ease:Bounce.easeOut})
+		// timeline.from('.background', .3, {scale:0})
+		// the config portion of the ease attribute allows devs to scale the degree of the animation - adding large numbers will increase
+		//	how dramatically the animation plays out, and adding a decimal number allows the animation to not be as extreme
+		// timeline.from('h1', .7, {opacity:0, scale:2, ease:Back.easeOut.config(4)})
+
+		// Timing position
+		// even with the addiition of easing, the animations still look outdated because they play in sequence - 
+		//	we can actually modify further when each animation plays by adding the position parameter - let's take
+		//	what we have so far and add position so that animations seem to play asyncronously:
 		let timeline = new TimelineMax();
-		timeline.from('.logo', 1, {scale:0, ease:Bounce.easeOut})
-		timeline.from('.background', .3, {scale:0})
-		timeline.from('h1', .7, {opacity:0, scale:2, ease:Back.easeOut.config(4)})
+		timeline.from('.logo', 0.7, {scale:0, ease:Bounce.easeOut})
+		timeline.from('.background', .3, {scale:0}, "-=0.5")
+		timeline.from('h1', .7, {opacity:0, scale:2, ease:Back.easeOut.config(4)}, "-=0.5")
+
 	</script>
 </body>
 </html>
