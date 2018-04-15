@@ -46,12 +46,19 @@
 		<p>Platform</p>
 	</div>
 
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
 	<script>
+
+		// staggering, similar to timeline, allows us to define how much time to wait before playing the next
+		//	animation
+
 		// Explanation of Syntax:
 		// TweenMax.staggerFrom(target, durationOfAnimation, {vars}, staggerAmount);
 
 		// Examples Below:
+		// grab all p tags, start and finish changing the opacity from 0 to the default defined amount in 1 second, and start the next
+		//	animation after waiting 0.1 seconds after the previous animation started
 		TweenMax.staggerFrom('p', 1, {opacity:0}, .1);
 		// TweenMax.staggerFrom('p', .2, {opacity:0, scale:.5}, .1);
 		// TweenMax.staggerFrom('p', .2, {opacity:0, scale:.5, y:-80}, .1);
