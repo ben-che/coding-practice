@@ -19,31 +19,63 @@ import {createStore } from 'redux';
 
 // mock state input:
 // starting with an empty state:
-let mockState = "";
-let mockAction = {
-    type:'ADD_LETTER',
-    letter:'r'
-}
 
-let wordReducer = (mockState, mockAction) => {
-    switch(mockAction.type) {
-        case 'ADD_LETTER':
-        return mockState + mockAction.letter;
-        case 'RESET':
-        return '';
-        default:
-        return mockState;
-    }
-}
+// let mockState = "";
+// let mockAction = {
+//     type:'ADD_LETTER',
+//     letter:'r'
+// }
 
-// reducers specify how state will change in response to redux actions that
+// let wordReducer = (mockState, mockAction) => {
+//     switch(mockAction.type) {
+//         case 'ADD_LETTER':
+//         return mockState + mockAction.letter;
+//         case 'RESET':
+//         return '';
+//         default:
+//         return mockState;
+//     }
+// }
+
+// however, this state isn't saved anywhere, and we need to make a Redux Store
+// the Store has 4 main methods:
+// store.getState() => returns current state of application
+// store.disptach(action) => the proper way to trigger state changes; it changes
+//  state based on action and rerenders any components affected by state
+// store.subscribe(listener) => adds a change listener, its called when an action
+//  is dispatched; often, though, when used in conjunction with React, we don't
+//  have to specify this, as React does it for us
+
+// Reducers specify how state will change in response to redux actions that
 //  are sent to store
 //  actions describe what happened, but don't describe state changes
-let reducer = () => {
+let reducer = (state, action) => {
+    // here, we have to make switch statements for all of the actions
+    //  we will provide it, and give it behaviour
+    if (action.type === 'changeState') {
+        return action.payload.newState; // this will change our "State" to "New state"
+    }
     return 'State';
 }
 
+// create a store for the Reducer
 const store = createStore(reducer);
+// we can use a .getState method to return what's in the store:
+console.log(store.getState());
+// at this moment, it will return 'State'
+
+// we can define an action using this syntax:
+const action = {
+    type: 'changeState',
+    payload: {
+        newState: 'New state'
+    }
+}
+
+// use action object to update state
+store.dispatch(action)
+
+// 
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
