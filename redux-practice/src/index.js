@@ -4,8 +4,11 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-// importing store from react-redux
-import {createStore } from 'redux';
+// importing store to hold states and combineReducers to combine two reducers into one
+//      so that it can be pased into store
+import { combineReducers, createStore } from 'redux';
+
+//  =========== =========== =========== =========== =========== =========== ===========
 
 // new terminology for redux:
 // Actions: Signal to UI that something happened, but don't actually handle state changes -
@@ -49,33 +52,91 @@ import {createStore } from 'redux';
 // Reducers specify how state will change in response to redux actions that
 //  are sent to store
 //  actions describe what happened, but don't describe state changes
-let reducer = (state, action) => {
-    // here, we have to make switch statements for all of the actions
-    //  we will provide it, and give it behaviour
-    if (action.type === 'changeState') {
-        return action.payload.newState; // this will change our "State" to "New state"
+
+// uncomment below for code:
+
+// let reducer = (state, action) => {
+//     // here, we have to make switch statements for all of the actions
+//     //  we will provide it, and give it behaviour
+//     if (action.type === 'changeState') {
+//         return action.payload.newState; // this will change our "State" to "New state"
+//     }
+//     return 'State';
+// }
+
+// // create a store for the Reducer
+// const store = createStore(reducer);
+// // we can use a .getState method to return what's in the store:
+// console.log(store.getState()); // at this moment, it will return 'State'
+
+// // we can define an action using this syntax:
+// const action = {
+//     type: 'changeState',
+//     payload: {
+//         newState: 'New state'
+//     }
+// }
+
+// // use action object to update state
+// store.dispatch(action);
+
+// console.log(store.getState()); // at this moment, it will return 'New state', after the update
+
+// =========== =========== =========== =========== =========== =========== ===========
+
+// once again, we can set up redux - this time we'll use a more complex state:
+
+// combining reducers:
+// first reducer will change product state
+let productsReducer = (state = [], action) => {
+    return state;
+}
+// second reducer will change user state
+let userReducer = (state = '', action) => {
+    // add a switch statement that will update the user state
+    switch (action.type) {
+        case "updateUser":
+            return action.payload;
     }
-    return 'State';
+    return state;
 }
 
-// create a store for the Reducer
-const store = createStore(reducer);
-// we can use a .getState method to return what's in the store:
-console.log(store.getState());
-// at this moment, it will return 'State'
+// combining two reducers:
+const allReducers = combineReducers({
+    products: productsReducer,
+    user: userReducer
+})
 
-// we can define an action using this syntax:
-const action = {
-    type: 'changeState',
+// create Store:
+// we can also pre-populate the store with objects:
+const store = createStore(
+            allReducers,
+            // prepopulating with objects:
+            { products: [{ name: 'iPhone'}],
+              user: 'Michael' },
+            // check to see if the browser has a redux extension
+            //  we can go on chrome, after we install the extension, to view our
+            //  redux actions & store
+            window.devToolsExtension && window.devToolsExtension())
+
+console.log(store.getState())
+// console logging store will return an actual object with key value pairs:
+// {
+//     products: [],
+//     user: ''
+// }
+
+// update state using an action 
+const updateUserAction = {
+    type: 'updateUser',
     payload: {
-        newState: 'New state'
+        user: 'John'
     }
 }
 
-// use action object to update state
-store.dispatch(action)
 
-// 
+
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
