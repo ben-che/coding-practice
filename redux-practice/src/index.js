@@ -8,6 +8,12 @@ import registerServiceWorker from './registerServiceWorker';
 //      so that it can be pased into store
 import { combineReducers, createStore } from 'redux';
 
+// react bindings to redux library
+import { Provider } from 'react-redux'; 
+
+// importing reducer functions into index.js
+import productsReducer from './reducers/product-reducers';
+import userReducer from './reducers/user-reducer';
 //  =========== =========== =========== =========== =========== =========== ===========
 
 // new terminology for redux:
@@ -88,24 +94,26 @@ import { combineReducers, createStore } from 'redux';
 
 // combining reducers:
 // first reducer will change product state
-let productsReducer = (state = [], action) => {
-    return state;
-}
+//  * moved to product-reducer *
+// let productsReducer = (state = [], action) => {
+//     return state;
+// }
 // second reducer will change user state
-let userReducer = (state = '', action) => {
-    // add a switch statement that will update the user state
-    switch (action.type) {
-        case "updateUser":
-            return action.payload;
-    }
-    return state;
-}
+////  * moved to user-reducer *
+// let userReducer = (state = '', action) => {
+//     // add a switch statement that will update the user state
+//     switch (action.type) {
+//         case "updateUser":
+//             return action.payload;
+//     }
+//     return state;
+// }
 
 // combining two reducers:
 const allReducers = combineReducers({
     products: productsReducer,
     user: userReducer
-})
+}, console.log('combining reducers'))
 
 // create Store:
 // we can also pre-populate the store with objects:
@@ -117,9 +125,10 @@ const store = createStore(
             // check to see if the browser has a redux extension
             //  we can go on chrome, after we install the extension, to view our
             //  redux actions & store
-            window.devToolsExtension && window.devToolsExtension())
+            window.devToolsExtension && window.devToolsExtension(),
+            console.log('creating store'))
 
-console.log(store.getState())
+// console.log(store.getState())
 // console logging store will return an actual object with key value pairs:
 // {
 //     products: [],
@@ -127,16 +136,15 @@ console.log(store.getState())
 // }
 
 // update state using an action 
-const updateUserAction = {
-    type: 'updateUser',
-    payload: {
-        user: 'John'
-    }
-}
+// const updateUserAction = {
+//     type: 'updateUser',
+//     payload: {
+//         user: 'John'
+//     }
+// }
 
 
-
-
-
-ReactDOM.render(<App />, document.getElementById('root'));
+// we have to wrap the App component with Provider to give
+//  it access to the store
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 registerServiceWorker();
