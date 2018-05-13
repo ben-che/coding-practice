@@ -7,9 +7,10 @@ import { connect } from 'react-redux';
 import { updateUser } from './actions/user-action.js';
 
 class App extends Component {
-  onUpdateUser = () => {
+  onUpdateUser = (event) => {
     console.log('onUpdateUser function fires - we mapped onUpdateUser to the updateUser in user-action, so that function will run');
-    this.props.onUpdateUser('Ben');
+    console.log('updating state to ', event.target.value)
+    this.props.onUpdateUser(event.target.value);
   }
 
   render() {
@@ -29,23 +30,27 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <div onClick={this.onUpdateUser}>
-          Update User
-          {this.props.user}
-        </div>
+        <input onChange={(event) => this.onUpdateUser(event)} /> 
+        {this.props.user}
       </div>
     );
   }
 }
 
 // this allows us to map state to props
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => {
+  console.log('mapping state to props')
+  console.log('these are the custom props manually being passed to app that we map')
+  console.log(props);
+  return {
   products: state.products,
-  user: state.user
-})
+  user: state.user,
+  userAndProp : `${state.user} ${props.testProp}`
+  }}
 
-const mapActionToProps = {
-  onUpdateUser: updateUser
+const mapActionToProps = (disptach, props) => {
+  return { onUpdateUser: updateUser}
+  
 }
 
 export default connect(mapStateToProps, mapActionToProps)(App);
