@@ -49,8 +49,8 @@ function userQuery(location, category, radius) {
 
         else {
             // debuggin *******************
-            // console.log(queryData.businesses[0]);
-            // console.log(queryDataLength);
+            console.log(queryData.businesses[0]);
+            console.log(queryDataLength);
             // ****************************
 
             // random restaurant information is held here
