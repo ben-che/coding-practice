@@ -94,3 +94,18 @@ let courseList = (courseCode, studentList) => {
 // courseList("CS101", studentList) // => [20181092, 20148332]
 // courseList("BU201", studentList) // => [20149031, 20170819, 20181092]
 // courseList("GEO101", studentList) // => "Empty class"
+
+// 4. Using Array.map() to return a new array with all the names of the first and last names of students changed to "Lebron" and "James"
+//      and their averages set to 69.
+let vandalizeMe = (students) => {
+    // function body here
+    let newList = students.map(student => {
+        student.name.firstName = "Lebron";
+        student.name.lastName = "James"
+        student.average = 69;
+        return student;
+    })
+    console.log(newList)
+}
+
+// vandalizeMe(studentList)
