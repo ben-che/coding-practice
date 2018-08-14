@@ -21,11 +21,33 @@ let addOne = () => {
 }
 
 
-
 // Filter
-//
+// returns an item if the provided condition is true:
+
+let shortNames = () => {
+    let names = ["Ben", "Ian","Will","Dani","Shane","Graeme","Alice"];
+    let shortNames = names.filter( (name) => {
+        return name.length <= 4
+    })
+    console.log("original names:")
+    console.log(names)
+    console.log("short names:")
+    console.log(shortNames)
+}
+
+// shortNames()
 
 // Reduce
-//
+// applies a provided accumulator to reduce all values into one:
 
+let groceryAdder = () => {
+    let groceryPrices = [1, 2, 3, 4, 5]
+    let totalCost = groceryPrices.reduce( (costThusfar, newCost) => {
+        return costThusfar + newCost
+    })
+
+    console.log(totalCost)
+}
+
+// groceryAdder()
 // forEach
