@@ -16,5 +16,8 @@ console.log(findSequence("123456789", "132535365")) // => 123456
 
 
 // React question:
-// Create a React countdown timer that counts down from 60.
-// When it reaches 0, replace the timer with "Time's Up"
+// Create a React countdown timer that starts from 10. 
+// When a button is clicked, the timer counts down to 0.
+// When it reaches 0, replace the time with "Time's Up"
+
+// Sample Screens:
