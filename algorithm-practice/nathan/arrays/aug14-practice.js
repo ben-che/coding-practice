@@ -3,10 +3,18 @@
 
 // ex. findSequence("abcdefg", "bfghr") => "bfg"
 
-
 function findSequence(x, y) {
 
   }
 
-console.log(findSequence("abcdef", "abf"))
-console.log(findSequence("abcdefg", "bfghr"))
+// Sample Tests:
+console.log(findSequence("abcdef", "abf")) // => abf
+console.log(findSequence("abcdefg", "bfghr")) // => bfg
+console.log(findSequence("bfghr", "abcdefg"))  // => bfg
+console.log(findSequence("abcabc", "abc")) // => abc
+console.log(findSequence("123456789", "132535365")) // => 123456
+
+
+// React question:
+// Create a React countdown timer that counts down from 60.
+// When it reaches 0, replace the timer with "Time's Up"
