@@ -21,3 +21,4 @@ console.log(findSequence("123456789", "132535365")) // => 123456
 // When it reaches 0, replace the time with "Time's Up"
 
 // Sample Screens:
+// https://www.figma.com/file/cc1afwHCxGwVzyZYpH99KIIk/react-sample-timer?node-id=0%3A1
