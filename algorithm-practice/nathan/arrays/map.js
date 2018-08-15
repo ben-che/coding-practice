@@ -6,7 +6,7 @@
 // Map
 // Closest sibling to a for loop - it iterates over each element and operates on it
 // The map method will always return an array:
-// Syntac goes as follows:
+// Syntax goes as follows:
 
 let addOne = () => {
     let numberArray = [1, 2, 3, 4, 5];
@@ -19,6 +19,71 @@ let addOne = () => {
     console.log('new array:')
     console.log(newArray)
 }
+
+
+
+
+
+let forLoopAddOne = () => {
+
+    let myNumbers = [13, 2, 3, 4, 5];
+    let newNumbers = []
+    for (let index = 0 ; index < myNumbers.length; index++) {
+        newNumbers.push(myNumbers[index] + 1);
+    }
+
+    console.log(myNumbers)
+
+}
+
+// forLoopAddOne()
+
+let myMapFunction = () => {
+    let myNumbers = [10, 12, 23, 42, 53];
+
+    let newNumbers = myNumbers.map( (element, index) => {
+        return element+1
+    })
+
+    console.log(myNumbers)
+    console.log(newNumbers)
+}
+
+
+
+
+// myMapFunction();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Filter
@@ -37,6 +102,91 @@ let shortNames = () => {
 
 // shortNames()
 
+
+
+
+
+
+let names = ["Ben", "Ian","Will","Dani","Shane","Graeme","Alice"];
+
+// return names with less than or equal to 4 letters
+let newNames = []   // ["ben",'ian','will','dani']
+
+for (let i = 0; i < names.length; i++) {
+
+    if (names[i].length <= 4) {
+        newNames.push(names[i])
+    }
+
+    else if (names[i].length > 4) {
+        // console.log('nothing')
+    }
+}
+// console.log(newNames)
+
+let newFilteredNames = names.filter( (element) =>  { return element.length <= 4 })
+
+console.log(newFilteredNames)
+
+let newMappedNames = names.map(element => {
+    if (element.length <= 4) {
+        return element
+    }
+})
+
+
+let functionA = () => {
+    console.log('hi')
+}
+
+let functionB = (fn) => {
+    fn()
+}
+
+functionB(functionA)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Reduce
 // applies a provided accumulator to reduce all values into one:
 
@@ -46,6 +196,7 @@ let groceryAdder = () => {
         return costThusfar + newCost
     })
 
+    console.log('total cost:')
     console.log(totalCost)
 }
 
