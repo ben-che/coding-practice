@@ -9,12 +9,16 @@ function findSequence(x, y) {
     let longerSequence = x.length >= y.length? x : y;
     let shorterSequence = x.length >= y.length? y : x;
 
+    // variable to hold answer
     let sequenceString = "";
 
+    // loop to go through shorter sequence
     for (let i = 0; i < shorterSequence.length; i++) {
 
+        // for each of the shorter sequene's elements, loop through the entirety of the longer sequence
         for(let j = i; j < longerSequence.length; j++) {
 
+            // as soon as the elements match up, add to the longer sequence and break
             if (shorterSequence[i] === longerSequence[j]) {
                 sequenceString += longerSequence[j]
                 break;
