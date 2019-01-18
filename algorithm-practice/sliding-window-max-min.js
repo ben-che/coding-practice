@@ -18,3 +18,5 @@ function slidingWindow(arr, k) {
 
 slidingWindow(testArr, 3);
 slidingWindow(testArr2, 2);
+
+// Variant:
